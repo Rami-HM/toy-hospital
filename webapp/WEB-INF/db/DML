@@ -1,0 +1,351 @@
+
+-- 관리자 테이블 데이터 삽입
+INSERT INTO ADMIN VALUES('admin','admin');
+
+--환자 테이블 데이터 삽입
+Insert into PATIENTS (PAT_ID,PAT_NAME,PAT_SSN,PAT_TEL,PAT_ADDRESS,PAT_PW,PAT_EMAIL,PAT_GENDER) values ('sky1004','김하늘','900512-2044568','01055558899','123454321','1234',null,'F');
+Insert into PATIENTS (PAT_ID,PAT_NAME,PAT_SSN,PAT_TEL,PAT_ADDRESS,PAT_PW,PAT_EMAIL,PAT_GENDER) values ('deepblue','이파랑','980421-1155845','010-4567-5218','부산광역시 사하구 서대신동45번길 파란색아파트','deepblue','deeplblue@naver.com','M');
+Insert into PATIENTS (PAT_ID,PAT_NAME,PAT_SSN,PAT_TEL,PAT_ADDRESS,PAT_PW,PAT_EMAIL,PAT_GENDER) values ('yellow','박노랑','870301-2004985','010-2558-8954','부산광역시 서구 토성동 노란색주택','yellow','yellow@naver.com','F');
+Insert into PATIENTS (PAT_ID,PAT_NAME,PAT_SSN,PAT_TEL,PAT_ADDRESS,PAT_PW,PAT_EMAIL,PAT_GENDER) values ('chansik7753','박찬식','930923-1111111','010-9333-7753','63043제주특별자치도 제주시 애월로123','123','chansik7753@naver.com','M');
+Insert into PATIENTS (PAT_ID,PAT_NAME,PAT_SSN,PAT_TEL,PAT_ADDRESS,PAT_PW,PAT_EMAIL,PAT_GENDER) values ('pinkpink','최핑크','010511-4120349','010-5711-1123','부산광역시 동구 초량동 핑크벽돌집','pinkpink','pinkpink@gmail.com','F');
+Insert into PATIENTS (PAT_ID,PAT_NAME,PAT_SSN,PAT_TEL,PAT_ADDRESS,PAT_PW,PAT_EMAIL,PAT_GENDER) values ('greenflower','송초록','600821-1065842','010-2102-5511','부산광역시 중구 중앙대로5길 초록잔디밭','greenflower','greenflower@daum.net','M');
+
+
+--  메뉴 테이블 데이터 삽입
+
+CREATE SEQUENCE MENUSEQ;
+
+Insert into MENU (MENU_ID,MENU_NAME,MENU_SEQ) values ('MENU06','의료진페이지',7);
+Insert into MENU (MENU_ID,MENU_NAME,MENU_SEQ) values ('MENU01','병원소개',1);
+Insert into MENU (MENU_ID,MENU_NAME,MENU_SEQ) values ('MENU03','참여마당',3);
+Insert into MENU (MENU_ID,MENU_NAME,MENU_SEQ) values ('MENU02','진료예약',2);
+Insert into MENU (MENU_ID,MENU_NAME,MENU_SEQ) values ('MENU05','관리자설정',5);
+Insert into MENU (MENU_ID,MENU_NAME,MENU_SEQ) values ('MENU04','고객센터',6);
+Insert into MENU (MENU_ID,MENU_NAME,MENU_SEQ) values ('MENU07','건강정보',4);
+
+--서브메뉴 테이블 데이터 삽입
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU07','MENU05','메뉴관리',3);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU03','MENU01','진료과소개',1);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU01','MENU01','의료진소개',2);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU02','MENU01','진료과위치',3);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU08','MENU05','게시판관리',1);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU05','MENU03','자유게시판',1);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU09','MENU07','건강 컬럼',2);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU10','MENU07','건강 TV',1);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU04','MENU03','Q&A',2);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU06','MENU05','회원관리',2);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU12','MENU04','고객센터',2);
+Insert into SUBMENU (SUB_ID,MENU_ID,SUB_NAME,SUB_SEQ) values ('SUBMENU11','MENU04','마이페이지',1);
+
+-- 부서 
+
+INSERT INTO DEPARTMENTS VALUES(10,'내과'
+    ,'대한민국의료계를 이끌어 온 전통과 명예로 세계 최고 수준의 교육, 연구, 진료를 통해 
+    21세기 선진 의료를 선도하기 위해 노력해 오고 있습니다. 
+    가장 큰 규모의 임상진료과로 교수 100명, 임상강사 51명, 전공의 88명의 의료진이 소속되어 있습니다. ');
+    
+INSERT INTO DEPARTMENTS VALUES(20,'외과'
+    ,'해방 직후인 1946년 탄생하였다. 
+    1960~70년대에 흉부외과, 신경외과, 정형외과, 성형외과 등이 외과로부터 분리되었고, 
+    1978년도에는 외과 내에 소아외과 분과를 개설하였다. 
+    최근에는 외과 분야가 더욱 전문화되고 광범해지면서 
+    2007년도에는 세부전공분야과로 간담췌외과, 위장관외과, 대장항문외과, 유방내분비외과, 이식혈관외과를 두게 되었다.');
+    
+INSERT INTO DEPARTMENTS VALUES(30,'신경과'
+    ,'신경과 (뇌신경센터)는 뇌, 척수, 말초신경, 근육에 생기는 다양한 질병을 진단하고 치료하는 의학분야입니다. 
+    뇌졸중 및 뇌혈관 질환, 뇌전증 (간질), 
+    파킨슨병과 같은 운동장애, 치매, 난치성 두통, 말초신경 및 근육의 질병, 루게릭병, 자가면역뇌염, 
+    신경계 감염증, 다발성경화증 및 시신경 척수염, 수면질환을 진료합니다. ');
+    
+INSERT INTO DEPARTMENTS VALUES(40,'정신과'
+    ,'정신과적 면담과 검사를 통해 질병을 진단하고 
+    개별 환자에 대해 생물학적?심리적?환경적 요인을 고려한 통합적인 치료를 하고 있습니다. 
+    조현병, 양극성장애, 우울장애, 강박장애, 불안장애, 치매 및 노인정신질환, 정신신체장애, 중독장애, 수면장애, 
+    통증장애 등 세부 질환을 전문적으로 다루는 특수 클리닉을 개설하여 최고의 진료를 제공합니다.');
+    
+INSERT INTO DEPARTMENTS VALUES(50,'피부과'
+    ,'피부과는 최상의 환자 진료와 끊임없는 연구 및 교육에 정진하는 
+    여러 교수진 및 임상강사, 전공의, 간호사들과 함께 
+    다양한 피부질환에 대해 최고 수준의 진료를 제공하기 위해 노력하고 있습니다. ');
+
+-- 원장, 과장, 일반의, 레지던트
+-- 의료진 테이블 데이터 삽입
+INSERT INTO EMP VALUES(
+     'jong1'
+    , '이종일'
+    , 10
+    , '원장'
+    , 'docJong.png'
+    , 'jong1'
+);
+
+INSERT INTO EMP VALUES(
+     'hisook'
+    , '정숙여'
+    , 20
+    , '일반의'
+    , 'docSook.png'
+    , 'hisook'
+);
+INSERT INTO EMP VALUES(
+     'bdy6060'
+    , '배도연'
+    , 30
+    , '일반의'
+    , 'docDy.png'
+    , 'bdy6060'
+);
+INSERT INTO EMP VALUES(
+     'brainch'
+    , '강바른'
+    , 40
+    , '과장'
+    , 'docCh.png'
+    , 'brainch'
+);
+INSERT INTO EMP VALUES(
+     'smith223'
+    , 'Jon Smith'
+    , 50
+    , '레지던트'
+    , 'docJons.png'
+    , 'smith223'
+);
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+values('leech','이창훈',10,'수석부장','6.png','leech');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+values('leesm','이상민',20,'부장','7.png','leesm');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+values('parkys','박영식',30,'차장','8.png','parkys');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+values('sondw','손대원',40,'선임과장','9.png','sondw');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+values('gubw','구본권',50,'과장','10.png','gubw');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+values('kimhs','김효수',10,'일반의','11.png','kimhs');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('osile','오세일',20,'수석부장','12.png','osile');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('kimyj','김용진',30,'부장','13.png','kimyj');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('kanghj','강현재',40,'차장','14.png','kanghj');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('leeyy','이해영',50,'선임과장','15.png','leeyy');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('chohj','조현재',10,'과장','16.png','chohj');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('parkkw','박경우',20,'일반의','17.png','parkkw');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('kimhk','김형관',30,'수석부장','18.png','kimhk');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('nash','나상훈',40,'부장','19.png','nash');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('choieg','최의근',50,'차장','20.png','choieg');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('leespyo','이승표',10,'선임과장','21.png','leespyo');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('yanghm','양한모',20,'과장','22.png','yanghm');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('hanjgyu','한정규',30,'일반의','23.png','hanjgyu');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('chamj','차명진',40,'수석부장','24.png','chamj');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('parkjb','박준빈',50,'부장','25.png','parkjb');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('kangjih','강지훈',10,'부장','26.png','kangjih');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('isolyeong','이소령',20,'차장','27.png','isolyeong');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('jangmo','장민옥',30,'선임과장','28.png','jangmo');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('chonghc','정현채',40,'과장','29.png','chonghc');
+
+INSERT INTO EMP(EMP_ID,EMP_NAME,DEPT_NUM,EMP_POSITION,EMP_IMG,EMP_PW)
+VALUES('kimyt','김용태',50,'일반의','30.png','kimyt');
+
+
+-- 예약 테이블 데이터 삽입
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (5,'2019-06-19','17:00:00','deepblue','jong1','배가 아파욥');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (94,'2019-06-25','13:00:00','yellow','jong1','사물과 조금만 닿아도 작정하고 두드려 맞은 것처럼 아픕니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (3,'2019-06-19','16:00:00','sky1004','jong1','배가 아파욥');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (7,'2019-06-19','14:00:00','sky1004','jong1','배가 아파욥');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (95,'2019-06-26','16:00:00','yellow','jong1','오랜만에 운동을 했는데 근육통이 너무 심합니다. ');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (9,'2019-06-20','12:00:00','sky1004','smith223','속이아파욥');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (10,'2019-06-20','14:00:00','yellow','jong1','배가 아파욥');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (93,'2019-07-06','14:00:00','pinkpink','hisook','허리를 숙이고 있었더니 갈비뼈가 부러져서 폐를 찌른 것 같아 외과에 예약했습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (22,'2019-07-20','15:00:00','sky1004','hisook','사물과 조금만 닿아도 작정하고 두드려 맞은 것처럼 아픕니다. ');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (24,'2019-08-23','15:00:00','yellow','smith223','스위스 여행을 끝내고 나니 옴이 옮은 것 같아 존스미스 선생님께 예약을 했습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (25,'2019-08-18','12:00:00','deepblue','jong1','딥블루색의 바다를 보고 있었더니 우울증이 생긴 것 같아 예약했습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (28,'2019-09-02','10:00:00','sky1004','hisook','허리를 숙이고 있었더니 갈비뼈가 부러져서 폐를 찌른 것 같아 외과에 예약했습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (29,'2019-05-24','17:00:00','sky1004','hisook','허리뼈가 부러졌는데 정교한 수술이 필요할 것 같아서 예약하게 되었습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (31,'2019-07-24','17:00:00','sky1004','hisook','준비 안된 빈곤에 길에서 잤더니 비타민 주사가 절실합니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (96,'2019-06-27','17:00:00','yellow','jong1','감기라고 예상되지만 장도연씨를 좋아해서 배도연 선생님께 예약했습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (97,'2019-06-28','13:00:00','yellow','jong1','딥블루색의 바다를 보고 있었더니 우울증이 생긴 것 같아 예약했습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (98,'2019-06-29','10:00:00','yellow','jong1','허리를 숙이고 있었더니 갈비뼈가 부러져서 폐를 찌른 것 같아 외과에 예약했습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (99,'2019-06-30','14:00:00','yellow','jong1','하루종일 팥빙수를 많이 먹었더니 배탈이 났습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (100,'2019-07-01','16:00:00','yellow','jong1','차를 몰다 교통사고를 당해서 머리가 아픕니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (101,'2019-06-25','11:00:00','deepblue','jong1','준비 안된 빈곤에 길에서 잤더니 비타민 주사가 절실합니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (102,'2019-06-28','15:00:00','pinkpink','jong1','허리를 숙이고 있었더니 갈비뼈가 부러져서 폐를 찌른 것 같아 외과에 예약했습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (103,'2019-06-30','11:00:00','greenflower','jong1','맷돌을 돌리는데 어이가 없어서 어이가 없어졌습니다.');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (201,'2019-06-01','13:00:00','yellow','hisook','수영장에서 미끄러져서 오른손목이 퉁퉁 부었습니다');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (202,'2019-06-11','15:00:00','yellow','jong1','어제밤 갑자기 윗배가 아리더니 이제는 아랫배가 콕콕 쑤셔요');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (104,'2019-06-26','14:00:00','sky1004','jong1','속이 미식거리고 머리가 어지럽습니다');
+Insert into RESERVATION (RES_NUM,RES_DATE,RES_TIME,PAT_ID,EMP_ID,DIAGNOSE) values (92,'2019-05-30','12:00:00','pinkpink','jong1','차를 몰다 교통사고를 당해서 머리가 아픕니다.');
+
+
+-- 게시판 테이블 데이터 삽입
+INSERT INTO BOARD VALUES(
+    (SELECT NVL(MAX(BRD_IDX),0) + 1 FROM BOARD) 
+    , '증상에 대해 문의 드립니다.'
+    , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+    , 'SUBMENU06'
+    , '안녕하세요 저번에 치료 받았던 환자입니다. 그 치료 이후로 사진 처럼 빨갛게 올라옵니다. 부작용일까요?'
+    , 0
+    , 0
+    , 1
+    , 0
+    , 1
+    , 'greenflower'
+    );
+    
+    INSERT INTO BOARD VALUES(
+    (SELECT NVL(MAX(BRD_IDX),0) + 1 FROM BOARD) 
+    , '처방된 약 중에서'
+    , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+    , 'SUBMENU06'
+    , '저번 처방 받았던 약을 진료없이 처방전만 받고 싶은데 가능한가요'
+    , 0
+    , 0
+    , 1
+    , 0
+    , 1
+    , 'sky1004'
+    );
+    
+    Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (2,'234','2019-06-20','SUBMENU05','233421234213145',1,1,1,1,1,'sky1004',13);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (3,'이종일 원장입니다.','2019-06-20','SUBMENU05','다들 방갑슴니다 ^^',0,0,2,0,2,'jong1',58);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (1,'1234','2019-06-20','SUBMENU05','1234',0,0,1,1,1,'sky1004',19);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (61,'공지사항','2019-06-22','SUBMENU05','부경대학교병원 공지사항입니다.',0,0,1,0,1,'chansik7753',21);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (63,'확인했습니다!','2019-06-23','SUBMENU04','확인했습니다 관리자님!',3,1,1,0,1,'chansik7753',3);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (81,'댓글','2019-06-24','SUBMENU05','댓글',1,1,1,0,1,'admin',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (82,'sdfsdf','2019-06-24','SUBMENU05','sdfsdfsdf',0,0,2,1,2,'chansik7753',2);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (84,'처음으로 글 남깁니다.','2019-06-25','SUBMENU04','앞으로 병원홈페이지를 자주 애용해야겠어요.',0,0,2,0,2,'chansik7753',3);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (83,'예약관련 질문입니다','2019-06-25','SUBMENU05','진료예약을 하려하는데 회원가입이 필요하더군요.
+혹시 가입없이 예약하는 방법은 없나요?',0,0,3,0,3,'chansik7753',4);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (85,'저도 공감합니다!!','2019-06-25','SUBMENU05','맞아요 저도 급해서 예약을 하려 들어와봤더니
+가입이 필요하더라구요...
+나중에는 꼭 개선했으면 좋겠습니다!',3,1,3,0,3,'sky1004',2);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (86,'안녕하세요','2019-06-25','SUBMENU04','안녕하세요 chansik7753님~ ',2,1,2,0,2,'sky1004',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (87,'확인','2019-06-25','SUBMENU04','확인했습니다!',2,1,1,1,1,'sky1004',1);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (88,'주차관련 문의','2019-06-25','SUBMENU04','주차관련 문의입니다.
+나중에 진료방문시 주차를 하려하는데 주차장은 따로 마련되어있는가요?',0,0,3,0,3,'sky1004',1);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (89,'좋은 의견입니다!','2019-06-25','SUBMENU05','좋은의견이네요!!
+나중에라도 꼭! 개선됬으면 좋겠어요!',4,2,3,0,3,'deepblue',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (90,'인터넷 사용을 많이 안해봐서...','2019-06-25','SUBMENU04','제가 예약을 하려하는데 어떻게 해야하나요?',0,0,4,0,4,'deepblue',2);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (91,'질문입니다.','2019-06-25','SUBMENU05','요새 많이 심적으로 힘든일이 많습니다...
+이럴땐 정신과를 방문해서 진료를 받는게 최우선이겠죠?',0,0,4,0,4,'yellow',2);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (92,'메뉴에 보시면','2019-06-25','SUBMENU04','메인홈페이지 상단에 보시면 나와있어요~',2,1,4,0,4,'yellow',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (93,'진료후기','2019-06-25','SUBMENU05','2주간 진료를 받은후기남겨요!!
+일단 의사진분들이 너무 병명에 대해서 알기쉽 설명해주고
+편하게 대해줘서
+무섭다는 생각이 전혀 들지않았어요!! 만족합니다!',0,0,5,0,5,'pinkpink',1);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (94,'상단메뉴에 보시면','2019-06-25','SUBMENU04','상단메뉴에 보시면 나와있습니다!! 편한 진료가 되시길!!',1,1,4,0,4,'pinkpink',2);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (95,'좋은 생각!!','2019-06-25','SUBMENU05','좋은생각입니다!! 그리고 이 병원 추천드립니다!!',2,1,3,0,3,'pinkpink',2);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (96,'질문있습니다.','2019-06-25','SUBMENU05','속이 더부룩하고 소화가 잘안되서
+진료예약을 하려하는데 어느부서로 예약해야되죠?',0,0,6,0,6,'greenflower',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (97,'당연하죠','2019-06-25','SUBMENU05','너무 앓지마시고 얼른 진료받으시는걸 추천드립니다.
+',2,1,4,0,4,'greenflower',1);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (98,'오 그런가요','2019-06-25','SUBMENU05','저도 그러면 예약을 해서 진료받아보도록 할게요',1,1,5,0,5,'greenflower',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (99,'확인했습니다','2019-06-25','SUBMENU04','확인했습니다!',1,1,1,0,1,'greenflower',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (100,'저도 애용하겠습니다!','2019-06-25','SUBMENU04','저도 애용하겠습니다!',1,1,2,0,2,'greenflower',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (101,'의견 반영하도록 노력하겠습니다.','2019-06-25','SUBMENU05','안녕하세요 원장 이종입입니다.
+불편을 겪으셨다니 빠른시일내로 회의때 의견을 반영해보도록 하겠습니다.',1,1,3,0,3,'jong1',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (102,'물론입니다.','2019-06-25','SUBMENU05','늦지 않게 치료가 필요합니다.
+정신과 예약은 홈페이지에서 가능합니다.',1,1,4,0,4,'jong1',0);
+Insert into BOARD (BRD_IDX,BRD_TITLE,BRD_REGDATE,SUB_ID,BRD_CONTS,BRD_STEP,BRD_LVL,BRD_NREF,BRD_DELNUM,BRD_BNUM,BRD_WRITER,READCOUNT) values (103,'네 그렇습니다.','2019-06-25','SUBMENU04','저희병원은 주차공간도 마련되어있고 진료를 받으셨다면
+주차비는 청구되지 않습니다.',1,1,3,0,3,'jong1',0);
+    
+    
+-- 파일 테이블 데이터 삽입
+INSERT INTO FILES VALUES(
+     (SELECT NVL(MAX(FILE_NUM),0) + 1 FROM FILES) 
+    , 1
+    , 'photoSkin.jpg'
+    , '.jpg'
+    , 'photoSkin.jpg'
+);
+
+INSERT INTO FILES VALUES(
+     (SELECT NVL(MAX(FILE_NUM),0) + 1 FROM FILES) 
+    , 1
+    , 'photoSkin.jpg'
+    , '.jpg'
+    , 'photoSkin1.jpg'
+);
+
+-- 연혁 테이블 데이터 삽입
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('jong1',1,'부경대학교 의과대학 졸업 및 학사 학위 취득','2001-02-18');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('jong1',2,'미국 의사고시 합격','2003-04-12');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('jong1',3,'부경대학교 의과대학 석사 학위 취득','2004-02-18');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('jong1',4,'부경 달 맞이 치료 의료원 설립','2005-02-18');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('jong1',5,'부경대학교병원 설립','2012-11-18');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('hisook',6,'부경대학교 의과대학 졸업 및 학사 학위 취득','2005-05-05');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('hisook',7,'부경대학교 의과대학 의학과 / 의학박사','2008-05-05');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('hisook',8,'부경대학교 장기이식 센터 센터장','2015-06-23');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('hisook',9,'부경대학교병원 외과 센터장','2016-10-20');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('hisook',10,'미국 이식 학회(AST) Young Investigator Award','2017-01-03');
+Insert into HISTORY (EMP_ID,HST_NUM,HST_CAREER,HST_DATE) values ('hisook',11,'부경대학교병원 장기 이식센터 / 진료조교수','2018-04-18');
+
+
+-- 진료 테이블 데이터 삽입
+Insert into TREATMENT (TRT_NUM,TRT_DATE,PAT_ID,EMP_ID,EMP_CONTS,RES_NUM) values (1,'2019-05-22','yellow','smith223','갑각류 알레르기, RE-40 RFNG-887 처방 바람',1);
+Insert into TREATMENT (TRT_NUM,TRT_DATE,PAT_ID,EMP_ID,EMP_CONTS,RES_NUM) values (9,'2019-06-01','yellow','hisook','가벼운 염좌, 소염진통제 처방',201);
+Insert into TREATMENT (TRT_NUM,TRT_DATE,PAT_ID,EMP_ID,EMP_CONTS,RES_NUM) values (10,'2019-06-11','yellow','jong1','스트레스성 위경련, 휴식 必',202);
+
+
+-- 직워 테이블 데이터 삽입
+INSERT INTO POSITION VALUES('원장',1);
+INSERT INTO POSITION VALUES('수석부장', 2);
+INSERT INTO POSITION VALUES('부장', 3);
+INSERT INTO POSITION VALUES('차장', 4);
+INSERT INTO POSITION VALUES('선임과장', 5);
+INSERT INTO POSITION VALUES('과장', 6);
+INSERT INTO POSITION VALUES('일반의', 7);
+INSERT INTO POSITION VALUES('수간호사', 8);
+INSERT INTO POSITION VALUES('레지던트', 9);
+INSERT INTO POSITION VALUES('사원',10);
+INSERT INTO POSITION VALUES('약사',10);
+INSERT INTO POSITION VALUES('간호사',10);
+INSERT INTO POSITION VALUES('기사', 10);
+
+-- 외래키 변경
+ALTER TABLE EMP
+ADD CONSTRAINT EMP_POSI_FK
+FOREIGN KEY(EMP_POSITION) REFERENCES POSITION(EMP_POSITION);
+
+
+-- 주소는 엑셀로 첨부합니다.

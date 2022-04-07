@@ -1,0 +1,1689 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 화요일-6월-25-2019   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Package PKG_DOCTOR
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_DOCTOR" AS 
+
+  PROCEDURE PROC_DOCTOR_LIST
+  (
+    IN_DEPT_NAME IN VARCHAR2,
+    O_CUR OUT SYS_REFCURSOR  
+  );
+
+   PROCEDURE PROC_DOCTOR_LIST2
+  ( 
+    IN_DEPT_NAME IN VARCHAR2,
+    O_CUR OUT SYS_REFCURSOR  
+  );
+
+
+  PROCEDURE PROC_DOCTOR_DETAILLIST
+  (
+     IN_DEPT_NUM IN NUMBER,
+     O_CUR OUT SYS_REFCURSOR
+  );
+
+
+    PROCEDURE PROC_DOCTOR_DETAILLIST2
+  (
+     IN_DEPT_NUM IN NUMBER,
+     IN_DEPT_NAME IN VARCHAR2,
+     O_CUR OUT SYS_REFCURSOR
+  );
+
+    PROCEDURE PROC_DOCTOR_FINALSEARCH
+    (
+        IN_DEPT_NAME IN VARCHAR2,
+        IN_EMP_NAME IN VARCHAR2,
+        O_CUR OUT SYS_REFCURSOR
+     );
+
+        PROCEDURE PROC_DOCTOR_FINALSEARCH2
+    (
+        IN_DEPT_NAME IN VARCHAR2,
+        IN_EMP_NAME IN VARCHAR2,
+        O_CUR OUT SYS_REFCURSOR
+     ); 
+
+    PROCEDURE PROC_DOCTOR_CAREER
+    (
+        IN_EMP_ID IN VARCHAR2,
+         O_CUR OUT SYS_REFCURSOR
+    
+    );
+    
+END PKG_DOCTOR;
+
+----------------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Package PKG_ADMIN
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_ADMIN" AS 
+
+  PROCEDURE PROC_ADMIN_LOGIN
+  (
+    IN_ADMIN_ID  IN  VARCHAR2,
+    IN_ADMIN_PW  IN  VARCHAR2,
+    O_CUR        OUT SYS_REFCURSOR
+  );  
+
+END PKG_ADMIN;
+--------------------------------------------------------
+--  DDL for Package PKG_EMP
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_EMP" AS 
+
+    PROCEDURE PROC_EMP_LIST
+    (
+        O_CUR     OUT  SYS_REFCURSOR
+    );
+     PROCEDURE PROC_EMP_DETAILLIST
+      (
+        in_dept_num in number,
+        O_CUR OUT SYS_REFCURSOR
+      ) ;
+
+  PROCEDURE PROC_ADMIN_LOGIN
+  (
+       IN_EMP_ID       IN      VARCHAR2,
+        IN_EMP_PW      IN     VARCHAR2,
+        ADMIN_ID           OUT     VARCHAR2
+  );
+  PROCEDURE PROC_EMP_LOGIN
+    (
+        IN_EMP_ID       IN      VARCHAR2,
+        IN_EMP_PW       IN      VARCHAR2,
+        O_CUR           OUT     SYS_REFCURSOR
+    );
+
+  PROCEDURE PROC_EMP_RESERVATIONDATA
+    (
+        IN_PAT_ID          IN      VARCHAR2,
+        IN_RES_DATE        IN      VARCHAR2,
+        IN_RES_TIME        IN      VARCHAR2,
+        O_CUR              OUT     SYS_REFCURSOR
+    );
+
+  PROCEDURE PROC_EMP_INQUIRY
+    ( 
+        IN_EMP_ID          IN      VARCHAR2,
+        O_CUR              OUT     SYS_REFCURSOR
+    );
+
+  PROCEDURE PROC_EMP_INQUIRYEMP
+    (
+      IN_EMP_ID          IN      VARCHAR2,
+      O_CUR              OUT     SYS_REFCURSOR
+    );
+
+  PROCEDURE PROC_EMP_RESERVATION
+    (
+        IN_RES_NUM      IN      VARCHAR2,
+        O_CUR           OUT     SYS_REFCURSOR 
+    );
+
+  PROCEDURE PROC_EMP_INSERTCONTS
+    (
+        IN_PAT_ID          IN      NUMBER,
+        IN_TRT_NUM         IN      NUMBER,
+        IN_TRT_DATE        IN      VARCHAR2,
+        IN_EMP_ID          IN      VARCHAR2,
+        IN_EMP_CONTS       IN      VARCHAR2,
+        IN_RES_NUM         IN      NUMBER
+    );
+
+  PROCEDURE PROC_EMP_TREATHISTORY
+    (
+        IN_PAT_ID          IN      NUMBER,
+        O_CUR              OUT     SYS_REFCURSOR 
+    );
+
+    procedure proc_emp_delete
+       (
+            IN_EMP_ID IN VARCHAR2   
+       );
+       
+       PROCEDURE PROC_DOCTOR_CAREER
+    (
+        IN_EMP_ID IN VARCHAR2,
+         O_CUR OUT SYS_REFCURSOR
+    
+    );
+END PKG_EMP;
+--------------------------------------------------------
+--  DDL for Package PKG_HISTORY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_HISTORY" AS 
+
+    PROCEDURE PROC_HISTORY_LIST
+    (
+      IN_EMP_ID IN VARCHAR2,
+     O_CUR OUT SYS_REFCURSOR
+    );
+
+
+  PROCEDURE PROC_HISTORY_LIST2
+  (  
+  O_CUR OUT SYS_REFCURSOR
+  );
+
+END PKG_HISTORY;
+--------------------------------------------------------
+--  DDL for Package PKG_MENU
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_MENU" AS 
+    PROCEDURE PROC_MENU_LIST(
+        O_CUR       OUT SYS_REFCURSOR
+    );
+
+    PROCEDURE PROC_MENU_INSERT(
+        IN_MENU_NAME    IN  VARCHAR2,
+        IN_MENU_SEQ         IN NUMBER
+    );
+
+    PROCEDURE PROC_MENU_DELETE(
+        IN_MENU_ID      IN  VARCHAR2
+    );
+
+    PROCEDURE PROC_MENU_UPDATE(
+        IN_NEW_SEQ          IN  NUMBER
+        ,IN_MENU_NAME    IN  VARCHAR2
+        ,IN_MENU_ID          IN VARCHAR2
+    );
+END PKG_MENU;
+--------------------------------------------------------
+--  DDL for Package PKG_PAT
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_PAT" AS 
+    --마이페이지 예약 현황 리스트
+    PROCEDURE PROC_PAT_MYPAGELIST
+    (
+        IN_PAT_ID       IN      VARCHAR2, 
+        O_CUR           OUT     SYS_REFCURSOR
+    );
+    --마이페이지에서 예약 삭제 
+    PROCEDURE PROC_PAT_MYPAGEDELETE
+    (
+        IN_PAT_ID       IN      VARCHAR2,
+        IN_RES_DATE     IN      VARCHAR2,
+        IN_RES_TIME     IN      VARCHAR2
+    );
+
+  PROCEDURE PROC_PAT_MYPAGEUPDATE
+    (
+        IN_PAT_ID           IN      VARCHAR2,
+        IN_PAT_NAME         IN      VARCHAR2,
+        IN_PAT_TEL          IN      VARCHAR2,
+        IN_PAT_ADDRESS      IN      VARCHAR2,
+        IN_PAT_PW           IN      VARCHAR2,
+        IN_PAT_EMAIL        IN      VARCHAR2
+    );
+
+  PROCEDURE PROC_PAT_MYPAGEMEMBER
+    (
+        IN_PAT_ID           IN      VARCHAR2,
+        O_CUR               OUT     SYS_REFCURSOR
+    );
+
+END PKG_PAT;
+--------------------------------------------------------
+--  DDL for Package PKG_PATIENTS
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_PATIENTS" AS 
+    PROCEDURE PROC_PATIENTS_LIST(
+        O_CUR       OUT SYS_REFCURSOR
+    );
+  PROCEDURE PROC_PATIENTS_LOGIN (
+    IN_PAT_ID  IN   VARCHAR2,
+    IN_PAT_PW  IN   VARCHAR2,
+    OUT_CUR    OUT  SYS_REFCURSOR
+  );
+
+  PROCEDURE PROC_PATIENTS_INQUIRY (
+    IN_PAT_ID      IN  VARCHAR2,
+    O_CUR          OUT SYS_REFCURSOR
+  );
+
+  PROCEDURE PROC_PATIENTS_REGISTER (
+    IN_PAT_ID      IN  VARCHAR2,
+    IN_PAT_PW      IN  VARCHAR2,
+    IN_PAT_NAME    IN  VARCHAR2,
+    IN_PAT_SSN     IN  VARCHAR2,
+    IN_PAT_TEL     IN  VARCHAR2,
+    IN_PAT_EMAIL   IN  VARCHAR2,
+    IN_PAT_ADDRESS IN  VARCHAR2,
+    IN_PAT_GENDER  IN  VARCHAR2
+  );
+
+PROCEDURE PROC_PATIENTS_DELETE(
+    IN_PAT_ID IN VARCHAR2  
+  ) ;
+  
+  PROCEDURE PROC_PATIENTS_FINDID(
+    IN_PAT_NAME   IN VARCHAR2,
+    IN_PAT_SSN  IN VARCHAR2,
+    O_CUR          OUT SYS_REFCURSOR
+  );
+PROCEDURE PROC_PATIENTS_FINDPWD(
+    IN_PAT_ID IN VARCHAR2,
+    IN_PAT_NAME   IN VARCHAR2,
+    IN_PAT_SSN  IN VARCHAR2,
+    O_CUR          OUT SYS_REFCURSOR
+  ) ;
+  PROCEDURE PROC_PATIENTS_CHANGEPWD(
+    IN_PAT_ID IN VARCHAR2,
+    IN_PAT_PW IN VARCHAR2
+   );
+END PKG_PATIENTS;
+--------------------------------------------------------
+--  DDL for Package PKG_PDS
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_PDS" AS 
+
+  PROCEDURE  PROC_PDS_LIST
+  (
+      IN_SUB_ID    IN     VARCHAR2,     
+     
+      IN_NOWPAGE   IN     NUMBER,   -- 현재 페이지 정보(보여줄)
+      IN_PAGECOUNT  IN     NUMBER,   -- 한 페이지에 보여줄 자료수
+      
+      OUT_TOTALCOUNT  OUT  NUMBER,   -- 전체 자료수 (돌려받을)
+     
+      O_CUR         OUT    SYS_REFCURSOR
+  ); 
+
+   PROCEDURE  PROC_PDS_INSERT (
+
+       IN_SUB_ID   IN    VARCHAR2    
+     , IN_BRD_TITLE     IN    VARCHAR2
+     , IN_BRD_CONTS      IN    VARCHAR2
+     , IN_BRD_WRITER    IN    VARCHAR2
+     , IN_BRD_BNUM      IN    NUMBER
+     , IN_BRD_LVL       IN    NUMBER 
+     , IN_BRD_STEP      IN    NUMBER 
+     , IN_BRD_NREF      IN    NUMBER     
+
+     -- File Upload 부분 처리
+     , IN_FILE_NAME   IN    FILE_ARRAY
+     , IN_FILE_EXT    IN    FILE_ARRAY
+     , IN_SFILE_NAME  IN    FILE_ARRAY
+  );
+
+
+  PROCEDURE PROC_VIEW_CONTENT (
+    IN_BRD_IDX  IN  NUMBER,
+    O_CUR   OUT SYS_REFCURSOR
+  );
+
+  PROCEDURE PROC_VIEW_CONTENT_SUB (
+    IN_BRD_IDX  IN  NUMBER,
+    O_CUR   OUT SYS_REFCURSOR
+  );
+
+  PROCEDURE PROC_UPDATE_CONTENT (  
+    IN_BRD_IDX    IN  NUMBER,
+    IN_BRD_TITLE  IN  VARCHAR2,
+    IN_BRD_CONTS   IN  VARCHAR2
+  );
+
+  PROCEDURE PROC_FILE_LIST (
+    IN_BRD_IDX  IN  NUMBER,
+    O_CUR   OUT SYS_REFCURSOR
+  );
+
+  PROCEDURE PROC_PDS_DELETE (
+    IN_BRD_IDX  IN  NUMBER
+  );  
+
+END PKG_PDS;
+--------------------------------------------------------
+--  DDL for Package PKG_RES
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_RES" AS 
+
+    PROCEDURE PROC_RES_DATE
+    (
+        IN_RES_DATE     IN      VARCHAR2, 
+        O_CUR           OUT     SYS_REFCURSOR
+    );
+
+    PROCEDURE PROC_RES_LIST
+    (
+        IN_RES_DATE     IN      VARCHAR2,
+        IN_EMP_NAME     IN      VARCHAR2,
+        O_CUR           OUT     SYS_REFCURSOR
+    );
+    PROCEDURE PROC_RES_INSERT
+    (
+        IN_RES_NUM      IN      NUMBER,
+        IN_RES_DATE     IN      VARCHAR2,
+        IN_RES_TIME     IN      VARCHAR2,
+        IN_PAT_ID       IN      VARCHAR2,
+        IN_DIAGNOSE     IN      VARCHAR2,
+        IN_EMP_NAME     IN      VARCHAR2
+    );
+  PROCEDURE PROC_RES_CHECK
+    (
+        IN_RES_DATE     IN      VARCHAR2,
+        IN_RES_TIME	    IN	    VARCHAR2,
+        IN_PAT_ID       IN      VARCHAR2,
+        O_CUR           OUT     SYS_REFCURSOR
+    );
+
+END PKG_RES;
+--------------------------------------------------------
+--  DDL for Package PKG_RESERVATION
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_RESERVATION" AS 
+
+  -- 전체 예약내역 조회
+  PROCEDURE PROC_RESERVATION_INQUIRY
+    (
+      IN_EMP_ID       IN      VARCHAR2,
+      O_CUR           OUT     SYS_REFCURSOR 
+    );
+
+  --예약 현황 조회(오늘)  
+  PROCEDURE PROC_RESERVATION_INQUIRYTODAY
+  (
+    IN_EMP_ID       IN      VARCHAR2,
+    O_CUR           OUT     SYS_REFCURSOR 
+  );   
+
+END PKG_RESERVATION;
+--------------------------------------------------------
+--  DDL for Package PKG_SUBMENU
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_SUBMENU" AS 
+
+    PROCEDURE PROC_SUBMENU_LIST
+    (
+        O_CUR     OUT  SYS_REFCURSOR
+    );
+    
+    PROCEDURE PROC_SUBMENU_MENU_LIST
+    (
+        IN_MENU_ID  IN   VARCHAR2,
+        O_CUR     OUT  SYS_REFCURSOR
+    );
+
+    PROCEDURE PROC_SUBMENU_INSERT(
+        IN_SUB_NAME    IN  VARCHAR2,
+        IN_SUB_SEQ         IN NUMBER,
+        IN_MENU_ID      IN  VARCHAR2
+    );
+
+    PROCEDURE PROC_SUBMENU_DELETE(
+        IN_SUB_ID      IN  VARCHAR2
+    );
+
+    PROCEDURE PROC_SUBMENU_UPDATE(
+        IN_SUB_SEQ          IN  NUMBER
+        ,IN_SUB_NAME    IN  VARCHAR2
+        ,IN_SUB_ID          IN VARCHAR2
+    );
+    
+END PKG_SUBMENU;
+--------------------------------------------------------
+--  DDL for Package PKG_TREATMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_TREATMENT" AS 
+
+  PROCEDURE PROC_TREATMENT_INQUIRY
+  (
+    IN_PAT_ID      IN    VARCHAR2,
+    O_CUR          OUT   SYS_REFCURSOR
+  );  
+  PROCEDURE PROC_TREATMENT_WRITE
+  (
+    IN_PAT_ID    IN   VARCHAR2,
+    IN_EMP_ID    IN   VARCHAR2,
+    IN_EMP_CONTS IN   VARCHAR2,
+    IN_RES_NUM   IN   NUMBER
+  );
+
+END PKG_TREATMENT;
+--------------------------------------------------------
+--  DDL for Package PKG_ZIPCODE
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE "PKG_ZIPCODE" AS 
+
+  PROCEDURE PROC_ZIPCODE_FIND (
+    IN_TEXT  IN  VARCHAR2,
+    O_CUR    OUT SYS_REFCURSOR
+  );
+
+END PKG_ZIPCODE;
+--------------------------------------------------------
+--  DDL for Package Body PKG_DOCTOR
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_DOCTOR" AS
+  PROCEDURE PROC_DOCTOR_LIST
+   (
+    IN_DEPT_NAME IN VARCHAR2,
+    O_CUR OUT SYS_REFCURSOR  
+  ) AS
+  BEGIN
+    open o_cur for 
+    SELECT DEPT_NUM,DEPT_NAME,DEPT_DESC
+    FROM  DEPARTMENTS
+    WHERE DEPT_NAME like('%' || in_dept_name||'%');
+    
+    END PROC_DOCTOR_LIST;
+
+
+  PROCEDURE PROC_DOCTOR_LIST2
+  ( 
+  IN_DEPT_NAME IN VARCHAR2,
+    O_CUR OUT SYS_REFCURSOR  
+  ) AS
+  BEGIN
+    open o_cur for 
+    SELECT DEPT_NUM,DEPT_NAME,DEPT_DESC
+    FROM  DEPARTMENTS
+    WHERE DEPT_NAME LIKE('%' || IN_DEPT_NAME||'%')
+    order by dept_name asc;
+        
+    END PROC_DOCTOR_LIST2;
+ 
+  PROCEDURE PROC_DOCTOR_DETAILLIST
+  (
+    IN_DEPT_NUM IN NUMBER,
+    O_CUR OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+   OPEN O_CUR FOR
+ 
+       SELECT 
+        D.DEPT_NUM,D.DEPT_NAME,D.DEPT_DESC,
+        E.EMP_ID,E.EMP_NAME,E.DEPT_NUM,E.EMP_POSITION,
+        E.EMP_IMG,P.EMP_POSITION,P.EMP_POSI_SEQ    
+        FROM DEPARTMENTS D ,EMP E,POSITION P 
+        WHERE D.DEPT_NUM=E.DEPT_NUM AND E.EMP_POSITION=P.EMP_POSITION 
+        AND D.DEPT_NUM=IN_DEPT_NUM 
+       order by P.EMP_POSI_SEQ,e.EMP_NAME desc;
+  
+    END PROC_DOCTOR_DETAILLIST;
+
+
+    PROCEDURE PROC_DOCTOR_DETAILLIST2
+  (
+    IN_DEPT_NUM IN NUMBER,
+    IN_DEPT_NAME IN VARCHAR2,
+    O_CUR OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+   OPEN O_CUR FOR
+ 
+       SELECT 
+        D.DEPT_NUM,D.DEPT_NAME,D.DEPT_DESC,
+        E.EMP_ID,E.EMP_NAME,E.DEPT_NUM,E.EMP_POSITION,
+        E.EMP_IMG,P.EMP_POSITION,P.EMP_POSI_SEQ    
+        FROM DEPARTMENTS D ,EMP E,POSITION P 
+        WHERE D.DEPT_NUM=E.DEPT_NUM AND E.EMP_POSITION=P.EMP_POSITION 
+        AND D.DEPT_NUM=IN_DEPT_NUM and E.EMP_NAME like('%' || in_dept_name||'%')
+       ORDER BY P.EMP_POSI_SEQ,E.EMP_NAME DESC;
+  
+    END PROC_DOCTOR_DETAILLIST2;
+ 
+  PROCEDURE PROC_DOCTOR_FINALSEARCH
+    (
+        IN_DEPT_NAME IN VARCHAR2,
+        IN_EMP_NAME IN VARCHAR2,
+        O_CUR OUT SYS_REFCURSOR
+     ) AS
+  BEGIN
+   OPEN O_CUR FOR
+    SELECT 
+        D.DEPT_NUM,D.DEPT_NAME,D.DEPT_DESC,
+        E.EMP_ID,E.EMP_NAME,E.DEPT_NUM,E.EMP_POSITION,
+        E.EMP_IMG,P.EMP_POSITION,P.EMP_POSI_SEQ    
+        
+        FROM DEPARTMENTS D INNER JOIN EMP E ON D.DEPT_NUM=E.DEPT_NUM
+             INNER JOIN POSITION P ON E.EMP_POSITION=P.EMP_POSITION         
+                WHERE D.DEPT_NAME LIKE('%' || IN_DEPT_NAME||'%') OR 
+                E.EMP_NAME like('%' || in_EMP_name||'%');
+    
+  END PROC_DOCTOR_FINALSEARCH;
+
+  PROCEDURE PROC_DOCTOR_FINALSEARCH2
+    (
+        IN_DEPT_NAME IN VARCHAR2,
+        IN_EMP_NAME IN VARCHAR2,
+        O_CUR OUT SYS_REFCURSOR
+     ) AS
+  BEGIN
+  
+  open o_cur for
+  SELECT 
+        D.DEPT_NUM,D.DEPT_NAME,D.DEPT_DESC,
+        E.EMP_ID,E.EMP_NAME,E.DEPT_NUM,E.EMP_POSITION,
+        E.EMP_IMG,P.EMP_POSITION,P.EMP_POSI_SEQ    
+        FROM DEPARTMENTS D INNER JOIN EMP E ON D.DEPT_NUM=E.DEPT_NUM
+             INNER JOIN POSITION P ON E.EMP_POSITION=P.EMP_POSITION         
+                WHERE D.DEPT_NAME LIKE('%' || IN_DEPT_NAME||'%') OR 
+                E.EMP_NAME like('%' || in_EMP_name||'%')
+                ORDER BY E.EMP_NAME ASC, P.EMP_POSI_SEQ ASC;
+   
+  END PROC_DOCTOR_FINALSEARCH2;
+  
+ PROCEDURE PROC_DOCTOR_CAREER
+    (
+        IN_EMP_ID IN VARCHAR2,
+         O_CUR OUT SYS_REFCURSOR
+    
+    ) AS
+  BEGIN
+   OPEN O_CUR FOR 
+    
+   SELECT 
+        D.DEPT_NUM,D.DEPT_NAME,D.DEPT_DESC,
+        E.EMP_ID,E.EMP_NAME,E.DEPT_NUM,E.EMP_POSITION,
+        E.EMP_IMG,P.EMP_POSITION,P.EMP_POSI_SEQ    
+        FROM DEPARTMENTS D ,EMP E,POSITION P 
+        WHERE D.DEPT_NUM=E.DEPT_NUM AND E.EMP_POSITION=P.EMP_POSITION 
+        and e.emp_id=in_emp_id;
+    
+  END PROC_DOCTOR_CAREER;
+ 
+ 
+END PKG_DOCTOR;
+
+
+
+----------------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Package Body PKG_ADMIN
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_ADMIN" AS
+
+  PROCEDURE PROC_ADMIN_LOGIN
+  (
+    IN_ADMIN_ID  IN  VARCHAR2,
+    IN_ADMIN_PW  IN  VARCHAR2,
+    O_CUR        OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT *
+      FROM ADMIN
+      WHERE ADMIN_ID = IN_ADMIN_ID
+        AND ADMIN_PW = IN_ADMIN_PW;
+  END PROC_ADMIN_LOGIN; 
+
+END PKG_ADMIN;
+--------------------------------------------------------
+--  DDL for Package Body PKG_EMP
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_EMP" AS
+
+  PROCEDURE PROC_EMP_LIST
+    (
+        O_CUR     OUT  SYS_REFCURSOR
+    ) AS 
+  BEGIN
+  OPEN O_CUR FOR
+        SELECT EMP_ID, EMP_NAME, DEPT_NUM, EMP_POSITION, EMP_IMG, EMP_PW
+        FROM EMP;
+  END PROC_EMP_LIST;
+
+    PROCEDURE PROC_EMP_DETAILLIST
+      (
+        in_dept_num in number,
+        O_CUR OUT SYS_REFCURSOR
+      ) AS
+      BEGIN
+       OPEN O_CUR FOR
+            SELECT D.DEPT_NUM,  D.DEPT_NAME,  D.DEPT_DESC,
+              E.EMP_ID  ,E.EMP_NAME,  E.DEPT_NUM,  E.EMP_POSITION,  E.EMP_IMG,
+              P.EMP_POSITION,P.EMP_POSI_SEQ    
+                FROM DEPARTMENTS D , EMP E,  POSITION P 
+          WHERE D.DEPT_NUM = E.DEPT_NUM 
+           AND E.EMP_POSITION=P.EMP_POSITION
+           AND D.DEPT_NUM = IN_DEPT_NUM
+           order by P.EMP_POSI_SEQ, e.EMP_NAME desc;         
+  END PROC_EMP_DETAILLIST;
+ 
+  PROCEDURE PROC_EMP_LOGIN
+    (
+        IN_EMP_ID       IN      VARCHAR2,
+        IN_EMP_PW       IN      VARCHAR2,
+        O_CUR           OUT     SYS_REFCURSOR
+    ) AS
+  BEGIN  
+    OPEN O_CUR FOR 
+    SELECT *  
+      FROM EMP
+      WHERE EMP_ID = IN_EMP_ID
+        AND EMP_PW = IN_EMP_PW;
+  END PROC_EMP_LOGIN;
+
+  PROCEDURE PROC_EMP_RESERVATIONDATA
+    (
+        IN_PAT_ID          IN      VARCHAR2,
+        IN_RES_DATE        IN      VARCHAR2,
+        IN_RES_TIME        IN      VARCHAR2,
+        O_CUR              OUT     SYS_REFCURSOR
+    ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT
+      R.RES_NUM, R.RES_DATE, R.RES_TIME, R.EMP_ID, R.DIAGNOSE,
+      P.PAT_ID, P.PAT_NAME, P.PAT_SSN, P.PAT_TEL, P.PAT_ADDRESS, P.PAT_EMAIL, P.PAT_GENDER
+      FROM RESERVATION R LEFT OUTER JOIN PATIENTS P
+        ON R.PAT_ID = P.PAT_ID
+        WHERE R.RES_DATE = IN_RES_DATE
+          AND R.RES_TIME = IN_RES_TIME
+          AND R.PAT_ID = IN_PAT_ID;
+  END PROC_EMP_RESERVATIONDATA;
+  
+  -- 아이디로 의료진정보 조회 
+  PROCEDURE PROC_EMP_INQUIRY
+    ( 
+        IN_EMP_ID          IN      VARCHAR2,
+        O_CUR              OUT     SYS_REFCURSOR
+    ) AS
+  BEGIN
+    OPEN O_CUR FOR
+      SELECT *
+        FROM EMP
+        WHERE EMP_ID = IN_EMP_ID;    
+  END PROC_EMP_INQUIRY;
+
+  PROCEDURE PROC_EMP_INQUIRYEMP
+    (
+      IN_EMP_ID          IN      VARCHAR2,
+      O_CUR              OUT     SYS_REFCURSOR
+    ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT D.DEPT_NUM,D.DEPT_NAME,D.DEPT_DESC,
+      E.EMP_ID,E.EMP_NAME,E.EMP_POSITION
+      FROM DEPARTMENTS D, EMP E 
+      WHERE D.DEPT_NUM=E.DEPT_NUM
+        AND E.EMP_ID = IN_EMP_ID;
+  END PROC_EMP_INQUIRYEMP;
+
+  PROCEDURE PROC_ADMIN_LOGIN
+  (
+       IN_EMP_ID       IN      VARCHAR2,
+        IN_EMP_PW      IN     VARCHAR2,
+        ADMIN_ID           OUT     VARCHAR2
+  ) AS
+  BEGIN
+    SELECT ADMIN_ID INTO ADMIN_ID
+    FROM ADMIN
+    WHERE ADMIN_ID = IN_EMP_ID
+    AND ADMIN_PW = IN_EMP_PW;
+    
+  END PROC_ADMIN_LOGIN;
+
+--예약 현황 조회  
+  PROCEDURE PROC_EMP_RESERVATION
+    (
+        IN_RES_NUM      IN      VARCHAR2,
+        O_CUR           OUT     SYS_REFCURSOR 
+    ) AS
+  BEGIN
+  OPEN O_CUR FOR
+    SELECT 
+        RES_NUM,
+        RES_DATE,
+        RES_TIME,
+        PAT_ID,
+        EMP_ID,
+        DIAGNOSE
+    FROM RESERVATION
+    WHERE RES_NUM = IN_RES_NUM
+    ORDER BY RES_TIME ASC;
+  END PROC_EMP_RESERVATION;
+
+--진료 소견서 작성 
+  PROCEDURE PROC_EMP_INSERTCONTS
+    (
+        IN_PAT_ID          IN      NUMBER,
+        IN_TRT_NUM         IN      NUMBER,
+        IN_TRT_DATE        IN      VARCHAR2,
+        IN_EMP_ID          IN      VARCHAR2,
+        IN_EMP_CONTS       IN      VARCHAR2,
+        IN_RES_NUM         IN      NUMBER
+    ) AS
+  BEGIN
+    INSERT INTO TREATMENT 
+    (TRT_NUM, TRT_DATE, PAT_ID, EMP_ID, EMP_CONTS, RES_NUM)
+    VALUES 
+    (IN_TRT_NUM, IN_TRT_DATE, IN_PAT_ID, IN_EMP_ID, IN_EMP_CONTS, IN_RES_NUM);
+  END PROC_EMP_INSERTCONTS;
+  
+--환자 이름을 누르면 이전 진료기록 및 세부 정보 볼 수 있게
+  PROCEDURE PROC_EMP_TREATHISTORY
+    (
+        IN_PAT_ID          IN      NUMBER,
+        O_CUR              OUT     SYS_REFCURSOR 
+    ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT TRT_NUM, TRT_DATE, PAT_ID, EMP_ID, EMP_CONTS, RES_NUM
+    FROM TREATMENT
+    WHERE PAT_ID = IN_PAT_ID;
+  END PROC_EMP_TREATHISTORY;
+
+procedure proc_emp_delete
+   (
+        IN_EMP_ID IN VARCHAR2   
+   ) AS
+  BEGIN
+    
+    DELETE FROM RESERVATION WHERE EMP_ID=in_emp_id;
+    DELETE FROM TREATMENT WHERE EMP_ID=in_emp_id;
+    DELETE FROM HISTORY WHERE EMP_ID=IN_EMP_ID;
+    delete from emp where emp_id=in_emp_id;
+      
+  END proc_emp_delete;
+
+PROCEDURE PROC_DOCTOR_CAREER
+    (
+        IN_EMP_ID IN VARCHAR2,
+         O_CUR OUT SYS_REFCURSOR
+    
+    ) AS
+  BEGIN
+   OPEN O_CUR FOR 
+    
+   SELECT 
+        D.DEPT_NUM,D.DEPT_NAME,D.DEPT_DESC,
+        E.EMP_ID,E.EMP_NAME,E.DEPT_NUM,E.EMP_POSITION,
+        E.EMP_IMG,P.EMP_POSITION,P.EMP_POSI_SEQ    
+        FROM DEPARTMENTS D ,EMP E,POSITION P 
+        WHERE D.DEPT_NUM=E.DEPT_NUM AND E.EMP_POSITION=P.EMP_POSITION 
+        and e.emp_id=in_emp_id;
+    
+  END PROC_DOCTOR_CAREER; 
+
+END PKG_EMP;
+--------------------------------------------------------
+--  DDL for Package Body PKG_HISTORY
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_HISTORY" AS
+
+  PROCEDURE PROC_HISTORY_LIST
+    (
+      IN_EMP_ID IN VARCHAR2,
+     O_CUR OUT SYS_REFCURSOR
+    ) AS
+  BEGIN
+   OPEN O_CUR FOR 
+    SELECT EMP_ID,HST_NUM,HST_CAREER,HST_DATE
+    FROM HISTORY
+    WHERE EMP_ID=IN_EMP_ID;
+       
+  END PROC_HISTORY_LIST;
+
+  PROCEDURE PROC_HISTORY_LIST2
+  (
+  
+  O_CUR OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN O_CUR FOR 
+    SELECT EMP_ID,HST_NUM,HST_CAREER,HST_DATE
+    FROM HISTORY;
+  END PROC_HISTORY_LIST2;
+
+END PKG_HISTORY;
+--------------------------------------------------------
+--  DDL for Package Body PKG_MENU
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_MENU" AS
+
+  PROCEDURE PROC_MENU_LIST(
+        O_CUR       OUT SYS_REFCURSOR
+    ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT MENU_ID, MENU_NAME, MENU_SEQ
+        FROM MENU
+        ORDER BY menu_seq ASC;
+  END PROC_MENU_LIST;
+
+  PROCEDURE PROC_MENU_INSERT(
+        IN_MENU_NAME        IN  VARCHAR2,
+         IN_MENU_SEQ         IN NUMBER
+    ) AS 
+  BEGIN
+    INSERT INTO MENU(MENU_ID, MENU_NAME, MENU_SEQ)
+    VALUES(
+    (SELECT REPLACE('MENU'||TO_CHAR((MAX(SUBSTR(MENU_ID,5,2)) + 01),'00'),' ','')
+        FROM MENU) 
+    ,IN_MENU_NAME
+    ,IN_MENU_SEQ);
+
+  END PROC_MENU_INSERT;
+
+  PROCEDURE PROC_MENU_DELETE(
+        IN_MENU_ID      IN  VARCHAR2
+    ) AS
+  BEGIN
+   DELETE FROM FILES
+   WHERE BRD_IDX IN(
+        SELECT BRD_IDX
+        FROM BOARD
+        WHERE SUB_ID IN(
+            SELECT SUB_ID
+            FROM SUBMENU
+            WHERE MENU_ID = IN_MENU_ID));
+  
+    DELETE FROM BOARD
+    WHERE SUB_ID IN ( 
+        SELECT SUB_ID
+        FROM SUBMENU 
+        WHERE MENU_ID = IN_MENU_ID);
+  
+    DELETE FROM SUBMENU
+        WHERE MENU_ID = IN_MENU_ID;
+        
+    DELETE FROM MENU
+        WHERE MENU_ID = IN_MENU_ID;
+        
+  END PROC_MENU_DELETE;
+
+  PROCEDURE PROC_MENU_UPDATE(
+        IN_NEW_SEQ          IN  NUMBER
+        ,IN_MENU_NAME    IN  VARCHAR2
+        ,IN_MENU_ID          IN VARCHAR2
+    ) AS
+  BEGIN
+        UPDATE MENU
+        SET MENU_SEQ = IN_NEW_SEQ,
+              MENU_NAME = IN_MENU_NAME
+        WHERE MENU_ID = IN_MENU_ID;
+  END PROC_MENU_UPDATE;
+
+END PKG_MENU;
+--------------------------------------------------------
+--  DDL for Package Body PKG_PAT
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_PAT" AS
+  --마이페이지 예약 현황 리스트
+  PROCEDURE PROC_PAT_MYPAGELIST
+    (
+        IN_PAT_ID       IN      VARCHAR2, 
+        O_CUR           OUT     SYS_REFCURSOR
+    ) AS
+  BEGIN
+    OPEN O_CUR FOR
+        SELECT RES_DATE, RES_TIME, DEPT_NAME, EMP_NAME
+        FROM RESERVATION R LEFT JOIN EMP E
+        ON R.EMP_ID = E.EMP_ID
+        LEFT JOIN DEPARTMENTS D
+        ON E.DEPT_NUM = D.DEPT_NUM
+        WHERE PAT_ID = IN_PAT_ID;
+  END PROC_PAT_MYPAGELIST;
+  
+  --마이페이지에서 예약 삭제   
+  PROCEDURE PROC_PAT_MYPAGEDELETE
+    (
+        IN_PAT_ID       IN      VARCHAR2,
+        IN_RES_DATE     IN      VARCHAR2,
+        IN_RES_TIME     IN      VARCHAR2
+    ) AS
+  BEGIN  
+    DELETE FROM RESERVATION
+    WHERE RES_NUM = (SELECT RES_NUM FROM RESERVATION
+                        WHERE PAT_ID = IN_PAT_ID
+                        AND RES_DATE = IN_RES_DATE
+                        and res_time = IN_RES_TIME
+                        AND ROWNUM = 1);
+  END PROC_PAT_MYPAGEDELETE;
+
+--마이페이지에서 회원 정보 수정 
+  PROCEDURE PROC_PAT_MYPAGEUPDATE
+    (
+        IN_PAT_ID           IN      VARCHAR2,
+        IN_PAT_NAME         IN      VARCHAR2,
+        IN_PAT_TEL          IN      VARCHAR2,
+        IN_PAT_ADDRESS      IN      VARCHAR2,
+        IN_PAT_PW           IN      VARCHAR2,
+        IN_PAT_EMAIL        IN      VARCHAR2
+    ) AS
+  BEGIN
+    UPDATE patients
+SET
+     pat_name = IN_PAT_NAME,
+     pat_tel = IN_PAT_TEL,
+     pat_address = IN_PAT_ADDRESS,
+     pat_pw = IN_PAT_PW ,
+     pat_email = IN_PAT_EMAIL 
+WHERE
+    pat_id = in_pat_id;
+  END PROC_PAT_MYPAGEUPDATE;
+
+  PROCEDURE PROC_PAT_MYPAGEMEMBER
+    (
+        IN_PAT_ID           IN      VARCHAR2,
+        O_CUR               OUT     SYS_REFCURSOR
+    ) AS
+  BEGIN
+  OPEN O_CUR FOR
+    SELECT PAT_ID, PAT_NAME, PAT_SSN, PAT_TEL, PAT_ADDRESS, PAT_PW, PAT_EMAIL, PAT_GENDER
+    FROM PATIENTS
+    WHERE PAT_ID = IN_PAT_ID;
+  END PROC_PAT_MYPAGEMEMBER;
+
+END PKG_PAT;
+--------------------------------------------------------
+--  DDL for Package Body PKG_PATIENTS
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_PATIENTS" AS
+
+  PROCEDURE PROC_PATIENTS_LIST(
+        O_CUR       OUT SYS_REFCURSOR
+    ) AS 
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT  PAT_ID,
+                PAT_NAME,
+                PAT_SSN,
+                PAT_TEL,
+                PAT_ADDRESS,
+                PAT_PW,
+                PAT_EMAIL,
+                PAT_GENDER
+    FROM PATIENTS;
+  END PROC_PATIENTS_LIST;
+  
+  -- 고객 로그인
+  -- 로그인 성공시 고객 정보 반환
+  PROCEDURE PROC_PATIENTS_LOGIN (
+    IN_PAT_ID  IN   VARCHAR2,
+    IN_PAT_PW  IN   VARCHAR2,
+    OUT_CUR    OUT  SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN OUT_CUR FOR
+    
+    SELECT *
+      FROM PATIENTS
+      WHERE PAT_ID = IN_PAT_ID
+        AND PAT_PW = IN_PAT_PW;
+  END PROC_PATIENTS_LOGIN;
+  
+ 
+
+   
+
+  
+
+  -- 아이디로 고객정보 조회
+  PROCEDURE PROC_PATIENTS_INQUIRY (
+    IN_PAT_ID      IN  VARCHAR2,
+    O_CUR          OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT *
+      FROM PATIENTS
+      WHERE PAT_ID = IN_PAT_ID;
+  END PROC_PATIENTS_INQUIRY;
+
+  PROCEDURE PROC_PATIENTS_REGISTER (
+    IN_PAT_ID      IN  VARCHAR2,
+    IN_PAT_PW      IN  VARCHAR2,
+    IN_PAT_NAME    IN  VARCHAR2,
+    IN_PAT_SSN     IN  VARCHAR2,
+    IN_PAT_TEL     IN  VARCHAR2,
+    IN_PAT_EMAIL   IN  VARCHAR2,
+    IN_PAT_ADDRESS IN  VARCHAR2,
+    IN_PAT_GENDER  IN  VARCHAR2
+  ) AS
+  BEGIN
+    INSERT INTO PATIENTS(PAT_ID, PAT_PW, PAT_NAME, PAT_SSN, PAT_TEL, PAT_EMAIL, PAT_ADDRESS, PAT_GENDER)
+      VALUES(
+        IN_PAT_ID,
+        IN_PAT_PW,
+        IN_PAT_NAME,
+        IN_PAT_SSN,
+        IN_PAT_TEL,
+        IN_PAT_EMAIL,
+        IN_PAT_ADDRESS,
+        IN_PAT_GENDER
+      );  
+  END PROC_PATIENTS_REGISTER;
+
+  PROCEDURE PROC_PATIENTS_DELETE(
+    IN_PAT_ID IN VARCHAR2  
+  ) AS
+  BEGIN
+    DELETE FROM TREATMENT WHERE PAT_ID=IN_PAT_ID;
+    DELETE FROM RESERVATION WHERE PAT_ID=IN_PAT_ID;
+    DELETE FROM PATIENTS WHERE PAT_ID=IN_PAT_ID;
+
+  END PROC_PATIENTS_DELETE;
+
+PROCEDURE PROC_PATIENTS_FINDID(
+    IN_PAT_NAME   IN VARCHAR2,
+    IN_PAT_SSN  IN VARCHAR2,
+    O_CUR          OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+  
+     OPEN O_CUR FOR
+   
+      SELECT *
+   
+      FROM PATIENTS
+      WHERE PAT_NAME=IN_PAT_NAME
+      AND PAT_SSN=IN_PAT_SSN;
+    
+  END PROC_PATIENTS_FINDID;
+
+PROCEDURE PROC_PATIENTS_FINDPWD(
+    IN_PAT_ID IN VARCHAR2,
+    IN_PAT_NAME   IN VARCHAR2,
+    IN_PAT_SSN  IN VARCHAR2,
+    O_CUR          OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+  
+     OPEN O_CUR FOR
+   
+      SELECT *
+   
+      FROM PATIENTS
+      WHERE PAT_ID=IN_PAT_ID
+      AND PAT_NAME=IN_PAT_NAME
+      AND PAT_SSN=IN_PAT_SSN;
+    
+  END PROC_PATIENTS_FINDPWD;
+
+ 
+
+  PROCEDURE PROC_PATIENTS_CHANGEPWD(
+    IN_PAT_ID IN VARCHAR2,
+    IN_PAT_PW IN VARCHAR2
+   ) AS
+  BEGIN
+   UPDATE PATIENTS SET PAT_PW=IN_PAT_PW WHERE PAT_ID=IN_PAT_ID;
+   
+  END PROC_PATIENTS_CHANGEPWD;
+
+END PKG_PATIENTS;
+--------------------------------------------------------
+--  DDL for Package Body PKG_PDS
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_PDS" AS
+   
+  PROCEDURE  PROC_PDS_LIST   
+  ( 
+    IN_SUB_ID       IN     VARCHAR2,  -- 보여줄 메뉴 아이디  (MENU01)  
+    IN_NOWPAGE      IN     NUMBER,    -- 현재 페이지 정보(보여줄)
+    IN_PAGECOUNT    IN     NUMBER,    -- 한 페이지에 보여줄 자료수
+      
+    OUT_TOTALCOUNT  OUT    NUMBER,    -- 전체 자료수 (돌려받을)
+    O_CUR           OUT    SYS_REFCURSOR
+  ) AS
+      V_STARTNUM      NUMBER(5, 0);     -- 보여줄 자료의 시작번호
+      V_ENDNUM        NUMBER(5, 0);     -- 보여줄 자료의 끝번호
+  BEGIN    
+        
+    SELECT  COUNT(BRD_IDX)
+      INTO  OUT_TOTALCOUNT 
+      FROM  BOARD
+      WHERE SUB_ID = IN_SUB_ID; 
+      
+    V_STARTNUM := (IN_NOWPAGE - 1) * IN_PAGECOUNT  + 1;
+    V_ENDNUM   :=  IN_NOWPAGE      * IN_PAGECOUNT;
+     
+    IF  (V_ENDNUM >= OUT_TOTALCOUNT) 
+      THEN V_ENDNUM := OUT_TOTALCOUNT;
+    END IF;
+            
+    -- 자료실 자료 출력  (페이징 기술)  1 페이지 자료
+    OPEN O_CUR FOR
+      SELECT * 
+        FROM (   
+          SELECT
+            ROW_NUMBER() OVER (ORDER BY BRD_NREF DESC, BRD_STEP ASC) AS RN,
+            BRD_IDX,
+            SUB_ID,
+            LPAD(' ', 2*BRD_LVL) || DECODE(BRD_LVL, 0, ' ', 'RE:') || BRD_TITLE AS BRD_TITLE, -- 새글/답글
+            BRD_WRITER,
+            BRD_REGDATE,
+            READCOUNT,
+            (SELECT NVL(COUNT(FILE_NAME), 0)    
+               FROM  FILES
+               WHERE BRD_IDX = B.BRD_IDX
+            ) AS FILESCOUNT,                       -- 파일자료수
+            BRD_BNUM, 
+            BRD_LVL,
+            BRD_STEP,
+            BRD_NREF,
+            BRD_DELNUM 
+            
+            FROM BOARD  B
+            WHERE SUB_ID = IN_SUB_ID
+        ) T
+        WHERE T.RN BETWEEN V_STARTNUM AND V_ENDNUM
+        ORDER BY BRD_BNUM DESC, BRD_STEP ASC;
+    
+  END PROC_PDS_LIST; 
+ 
+ ---------------------------------------------------------
+
+  PROCEDURE  PROC_PDS_INSERT (
+  
+       IN_SUB_ID           IN    VARCHAR2    
+     , IN_BRD_TITLE     IN    VARCHAR2
+     , IN_BRD_CONTS      IN    VARCHAR2
+     , IN_BRD_WRITER    IN    VARCHAR2
+     , IN_BRD_BNUM      IN    NUMBER
+     , IN_BRD_LVL       IN    NUMBER 
+     , IN_BRD_STEP      IN    NUMBER 
+     , IN_BRD_NREF      IN    NUMBER     
+     
+     -- File Upload 부분 처리
+     , IN_FILE_NAME   IN    FILE_ARRAY
+     , IN_FILE_EXT    IN    FILE_ARRAY
+     , IN_SFILE_NAME  IN    FILE_ARRAY
+  ) AS
+      V_BRD_BNUM     NUMBER(5, 0);
+      V_BRD_LVL      NUMBER(5, 0);
+      V_BRD_STEP     NUMBER(5, 0);
+      V_BRD_NREF     NUMBER(5, 0);
+      
+      V_MAXBRD_IDX   NUMBER(5, 0);  -- BOARD 에 추가된 글번호
+  BEGIN
+     
+      IF  IN_BRD_BNUM   =  0 THEN        -- BRD_BNUM   =  0 새글
+          SELECT NVL(MAX(BRD_BNUM), 0) + 1 INTO V_BRD_BNUM FROM BOARD
+            WHERE SUB_ID = IN_SUB_ID;   
+            
+          V_BRD_LVL := 0 ;  
+          V_BRD_STEP := 0 ;
+          
+          SELECT NVL(MAX(BRD_NREF), 0) + 1 INTO V_BRD_NREF FROM BOARD
+            WHERE SUB_ID = IN_SUB_ID;
+      ELSE  -- 답글
+          V_BRD_BNUM := IN_BRD_BNUM;
+          V_BRD_LVL  := IN_BRD_LVL + 1;
+          V_BRD_STEP := IN_BRD_STEP + 1;
+          V_BRD_NREF := IN_BRD_NREF;
+          
+          -- 기존글의 BRD_STEP 변경(순서)
+          UPDATE   BOARD
+           SET     BRD_STEP    = BRD_STEP + 1
+           WHERE   BRD_NREF    = IN_BRD_NREF
+            AND    BRD_STEP    > IN_BRD_STEP
+            AND    SUB_ID = IN_SUB_ID;
+          
+      END IF;
+    
+      -- 글 추가
+      INSERT INTO BOARD
+      (
+           BRD_IDX 
+         , SUB_ID
+         , BRD_TITLE
+         , BRD_CONTS
+         , BRD_WRITER
+         , BRD_REGDATE
+         , READCOUNT
+         , BRD_BNUM
+         , BRD_LVL
+         , BRD_STEP
+         , BRD_NREF
+         , BRD_DELNUM      
+      ) VALUES 
+      (
+           BRDSEQ.NEXTVAL
+         , IN_SUB_ID
+         , iN_BRD_TITLE
+         , iN_BRD_CONTS
+         , iN_BRD_WRITER
+         , TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+         , 0
+         , V_BRD_BNUM
+         , V_BRD_LVL
+         , V_BRD_STEP
+         , V_BRD_NREF
+         , 0
+      );
+    
+     -- 추가된 파일 정보를 DB 저장
+      --- 추가된 글번호 알아내기 : BAORD
+      SELECT  MAX(BRD_IDX)
+       INTO   V_MAXBRD_IDX 
+       FROM   BOARD
+       WHERE  SUB_ID =  IN_SUB_ID;
+    
+     -- FILES 테이블에 저장된 파일 정보 담는다
+     IF IN_FILE_NAME(1) IS NOT NULL THEN
+        FOR  I  IN  IN_FILE_NAME.FIRST .. IN_FILE_NAME.LAST
+        LOOP
+           INSERT INTO FILES
+           VALUES 
+           (
+               (SELECT NVL(MAX(FILE_NUM), 0) + 1 FROM FILES)  -- FILE_BRD_IDX
+               , V_MAXBRD_IDX    -- BRD_IDX : V_MAXBRD_IDX
+               , IN_FILE_NAME ( I )
+               , IN_FILE_EXT  ( I )
+               , IN_SFILE_NAME( I )
+           ); 
+        END LOOP;    
+     END IF;
+
+  END PROC_PDS_INSERT;
+
+  PROCEDURE PROC_VIEW_CONTENT (
+    IN_BRD_IDX  IN  NUMBER,
+    O_CUR   OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    UPDATE BOARD
+      SET READCOUNT = READCOUNT + 1
+      WHERE BRD_IDX = IN_BRD_IDX; 
+  
+    OPEN O_CUR FOR
+    SELECT *
+      FROM BOARD
+      WHERE BRD_IDX = IN_BRD_IDX;
+  END PROC_VIEW_CONTENT;
+ 
+  PROCEDURE PROC_FILE_LIST (
+    IN_BRD_IDX  IN  NUMBER,
+    O_CUR   OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT FILE_NUM, BRD_IDX, FILE_NAME, FILE_EXT, SFILE_NAME
+      FROM FILES
+      WHERE BRD_IDX = IN_BRD_IDX;
+  END PROC_FILE_LIST;
+
+  PROCEDURE PROC_UPDATE_CONTENT (
+    IN_BRD_IDX    IN  NUMBER,
+    IN_BRD_TITLE  IN  VARCHAR2,
+    IN_BRD_CONTS   IN  VARCHAR2
+  ) AS
+  BEGIN
+    UPDATE BOARD 
+      SET BRD_TITLE = IN_BRD_TITLE,
+          BRD_CONTS  = IN_BRD_CONTS
+      WHERE BRD_IDX = IN_BRD_IDX;
+  END PROC_UPDATE_CONTENT;
+
+  PROCEDURE PROC_VIEW_CONTENT_SUB (
+    IN_BRD_IDX  IN  NUMBER,
+    O_CUR   OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT *
+      FROM BOARD
+      WHERE BRD_IDX = IN_BRD_IDX;
+  END PROC_VIEW_CONTENT_SUB;
+
+  -- 게시글 삭제
+  PROCEDURE PROC_PDS_DELETE (
+     IN_BRD_IDX  IN  NUMBER
+  ) AS
+      V_BRD_NREF  NUMBER(5,0);
+      V_BRD_LVL   NUMBER(5,0);
+      V_BRD_STEP  NUMBER(5,0);
+      
+      V_COUNT NUMBER(5,0);
+  BEGIN
+    UPDATE BOARD
+      SET BRD_DELNUM = 1
+      WHERE BRD_IDX = IN_BRD_IDX;
+      
+    -- 현재글의 답글 정보 확인
+    SELECT BRD_NREF, BRD_LVL, BRD_STEP
+      INTO V_BRD_NREF, V_BRD_LVL, V_BRD_STEP
+      FROM BOARD
+      WHERE BRD_IDX = IN_BRD_IDX;
+    
+    -- 새로운 변수 V_COUNT 정의 
+    SELECT MAX(BRD_STEP)
+      INTO V_COUNT
+      FROM BOARD
+      WHERE BRD_NREF = V_BRD_NREF;
+    
+    -- 본 글을 삭제할 경우
+    IF V_BRD_LVL = 0 THEN
+      UPDATE BOARD
+        SET BRD_DELNUM = 1
+        WHERE BRD_NREF = V_BRD_NREF;
+        
+    -- 답 글을 삭제할 경우(지우는 답글에 달려있는 답글도 삭제 처리)
+    ELSE
+      UPDATE BOARD
+        SET BRD_DELNUM = 1
+        WHERE BRD_NREF = V_BRD_NREF
+          AND BRD_STEP >= V_BRD_STEP
+          AND BRD_STEP < (
+            SELECT NVL(MIN(BRD_STEP), V_COUNT+1)
+              FROM BOARD
+              WHERE BRD_NREF = V_BRD_NREF
+                AND BRD_STEP > V_BRD_STEP
+                AND BRD_LVL <= V_BRD_LVL
+            );
+    END IF;
+  END PROC_PDS_DELETE;
+
+END PKG_PDS;
+--------------------------------------------------------
+--  DDL for Package Body PKG_RES
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_RES" AS
+    --예약 날짜  
+  PROCEDURE PROC_RES_DATE
+    (
+        IN_RES_DATE     IN      VARCHAR2, 
+        O_CUR           OUT     SYS_REFCURSOR
+    ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT RES_DATE
+    FROM RESERVATION
+    WHERE RES_DATE = IN_RES_DATE;
+  END PROC_RES_DATE;
+  
+    --예약 리스트
+  PROCEDURE PROC_RES_LIST
+    (
+        IN_RES_DATE     IN      VARCHAR2,
+        IN_EMP_NAME     IN      VARCHAR2,
+        O_CUR           OUT     SYS_REFCURSOR 
+    ) AS
+  BEGIN
+  OPEN O_CUR FOR
+    SELECT RES_TIME
+        FROM RESERVATION
+        WHERE EMP_ID = (
+            SELECT EMP_ID
+            FROM EMP
+            WHERE EMP_NAME = IN_EMP_NAME
+        )
+        AND RES_DATE = IN_RES_DATE;
+  END PROC_RES_LIST;
+    --예약 추가하기
+  PROCEDURE PROC_RES_INSERT
+    (
+        IN_RES_NUM      IN      NUMBER,
+        IN_RES_DATE     IN      VARCHAR2,
+        IN_RES_TIME     IN      VARCHAR2,
+        IN_PAT_ID       IN      VARCHAR2,
+        IN_DIAGNOSE     IN      VARCHAR2,
+        IN_EMP_NAME     IN      VARCHAR2
+    ) AS
+        
+  BEGIN 
+    INSERT INTO reservation 
+    (
+            RES_NUM,
+            RES_DATE,
+            RES_TIME,
+            PAT_ID,
+            EMP_ID,
+            DIAGNOSE
+    )
+    VALUES (
+            RESNUMSEQ.NEXTVAL,
+            IN_RES_DATE,
+            IN_RES_TIME,
+            IN_PAT_ID,
+            (SELECT EMP_ID
+             FROM EMP 
+               WHERE EMP_NAME = IN_EMP_NAME),
+            IN_DIAGNOSE
+);
+
+  END PROC_RES_INSERT;
+
+PROCEDURE PROC_RES_CHECK
+    (
+        IN_RES_DATE     IN      VARCHAR2,
+        IN_RES_TIME	    IN	    VARCHAR2,
+        IN_PAT_ID       IN      VARCHAR2,
+        O_CUR           OUT     SYS_REFCURSOR
+    ) AS
+  BEGIN
+  OPEN O_CUR FOR
+    SELECT RES_TIME
+        FROM RESERVATION
+        WHERE PAT_ID = IN_PAT_ID
+        AND RES_DATE = IN_RES_DATE
+	AND RES_TIME  = IN_RES_TIME;
+  END PROC_RES_CHECK;
+
+END PKG_RES;
+--------------------------------------------------------
+--  DDL for Package Body PKG_RESERVATION
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_RESERVATION" AS
+
+  -- 전체 예약내역 조회
+  PROCEDURE PROC_RESERVATION_INQUIRY
+  (
+    IN_EMP_ID       IN      VARCHAR2,
+    O_CUR           OUT     SYS_REFCURSOR 
+  ) AS
+    TODAY VARCHAR2(30);
+  BEGIN
+    SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+      INTO TODAY
+      FROM DUAL;
+  
+    OPEN O_CUR FOR
+    SELECT 
+      R.RES_NUM,
+      R.RES_DATE,
+      R.RES_TIME,
+      R.DIAGNOSE,
+      P.PAT_NAME
+      FROM RESERVATION R LEFT OUTER JOIN PATIENTS P
+        ON R.PAT_ID = P.PAT_ID
+        WHERE R.EMP_ID = IN_EMP_ID
+          AND R.RES_DATE >= TODAY
+      ORDER BY R.RES_DATE ASC;
+  END PROC_RESERVATION_INQUIRY;
+
+  -- 오늘 예약내역 조회
+  PROCEDURE PROC_RESERVATION_INQUIRYTODAY
+  (
+    IN_EMP_ID       IN      VARCHAR2,
+    O_CUR           OUT     SYS_REFCURSOR 
+  ) AS
+    TODAY VARCHAR2(30);
+  BEGIN
+    SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+      INTO TODAY
+      FROM DUAL;
+  
+    OPEN O_CUR FOR 
+    SELECT 
+      R.RES_NUM,
+      R.RES_DATE,
+      R.RES_TIME,
+      R.DIAGNOSE,
+      P.PAT_NAME,
+      P.PAT_ID
+      FROM RESERVATION R LEFT OUTER JOIN PATIENTS P
+        ON R.PAT_ID = P.PAT_ID
+        WHERE R.EMP_ID = IN_EMP_ID
+          AND R.RES_DATE = TODAY
+      ORDER BY R.RES_TIME ASC;
+  END PROC_RESERVATION_INQUIRYTODAY;
+
+END PKG_RESERVATION;
+--------------------------------------------------------
+--  DDL for Package Body PKG_SUBMENU
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_SUBMENU" AS
+
+  PROCEDURE PROC_SUBMENU_LIST
+    (
+        O_CUR     OUT  SYS_REFCURSOR
+    ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT SUB_ID, SUB_NAME, SUB_SEQ, MENU_ID
+        FROM SUBMENU
+        ORDER BY MENU_ID ASC, SUB_SEQ ASC;
+  END PROC_SUBMENU_LIST;
+
+  PROCEDURE PROC_SUBMENU_MENU_LIST 
+    (
+        IN_MENU_ID  IN   VARCHAR2,
+        O_CUR     OUT  SYS_REFCURSOR
+    ) AS
+   BEGIN
+       OPEN O_CUR FOR
+    SELECT SUB_ID, SUB_NAME, SUB_SEQ, MENU_ID
+        FROM SUBMENU
+        WHERE MENU_ID = IN_MENU_ID
+        ORDER BY SUB_SEQ ASC;
+  END PROC_SUBMENU_MENU_LIST;
+
+  PROCEDURE PROC_SUBMENU_INSERT(
+        IN_SUB_NAME    IN  VARCHAR2,
+        IN_SUB_SEQ         IN NUMBER,
+        IN_MENU_ID      IN  VARCHAR2
+    ) AS
+  BEGIN
+    INSERT INTO SUBMENU
+    VALUES(
+    (SELECT REPLACE('SUBMENU'||TO_CHAR((MAX(SUBSTR(SUB_ID,8,2)) + 01),'00'),' ','')
+        FROM SUBMENU) 
+    ,IN_MENU_ID
+    ,IN_SUB_NAME
+    ,IN_SUB_SEQ);
+  END PROC_SUBMENU_INSERT;
+
+  PROCEDURE PROC_SUBMENU_DELETE(
+        IN_SUB_ID      IN  VARCHAR2
+    ) AS
+  BEGIN
+    DELETE FROM FILES
+   WHERE BRD_IDX IN(
+        SELECT BRD_IDX
+        FROM BOARD
+        WHERE SUB_ID = IN_SUB_ID);
+  
+    DELETE FROM BOARD
+    WHERE SUB_ID  = IN_SUB_ID;
+  
+    DELETE FROM SUBMENU
+        WHERE SUB_ID = IN_SUB_ID;
+        
+  END PROC_SUBMENU_DELETE;
+
+  PROCEDURE PROC_SUBMENU_UPDATE(
+        IN_SUB_SEQ          IN  NUMBER
+        ,IN_SUB_NAME    IN  VARCHAR2
+        ,IN_SUB_ID          IN VARCHAR2
+    ) AS
+  BEGIN
+     UPDATE SUBMENU
+        SET SUB_SEQ = IN_SUB_SEQ,
+              SUB_NAME = IN_SUB_NAME
+        WHERE SUB_ID = IN_SUB_ID;
+  END PROC_SUBMENU_UPDATE;
+
+END PKG_SUBMENU;
+--------------------------------------------------------
+--  DDL for Package Body PKG_TREATMENT
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_TREATMENT" AS
+
+  PROCEDURE PROC_TREATMENT_INQUIRY
+  (
+    IN_PAT_ID      IN    VARCHAR2,
+    O_CUR          OUT   SYS_REFCURSOR
+  ) AS
+  BEGIN 
+    OPEN O_CUR FOR
+    SELECT
+      P.PAT_ID, P.PAT_NAME, P.PAT_TEL, P.PAT_ADDRESS, P.PAT_EMAIL, P.PAT_GENDER,
+      T.TRT_DATE, EMP_CONTS,
+      E.EMP_NAME,
+      D.DEPT_NAME
+      FROM PATIENTS P LEFT OUTER JOIN TREATMENT T
+        ON P.PAT_ID = T.PAT_ID 
+      INNER JOIN EMP E
+        ON T.EMP_ID = E.EMP_ID
+      INNER JOIN DEPARTMENTS D
+        ON E.DEPT_NUM = D.DEPT_NUM
+      WHERE P.PAT_ID = IN_PAT_ID;
+  END PROC_TREATMENT_INQUIRY;
+
+   --진료서 작성
+  PROCEDURE PROC_TREATMENT_WRITE
+  (
+    IN_PAT_ID    IN   VARCHAR2,
+    IN_EMP_ID    IN   VARCHAR2,
+    IN_EMP_CONTS IN   VARCHAR2,
+    IN_RES_NUM   IN   NUMBER
+  ) AS
+  BEGIN
+    INSERT INTO TREATMENT(TRT_NUM, TRT_DATE, PAT_ID, EMP_ID, EMP_CONTS, RES_NUM)
+      VALUES(
+        (SELECT NVL(MAX(TRT_NUM),0)+1 FROM TREATMENT),
+        TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+        IN_PAT_ID,
+        IN_EMP_ID,
+        IN_EMP_CONTS,
+        IN_RES_NUM);
+  END PROC_TREATMENT_WRITE;
+ 
+END PKG_TREATMENT;
+--------------------------------------------------------
+--  DDL for Package Body PKG_ZIPCODE
+--------------------------------------------------------
+
+  CREATE OR REPLACE PACKAGE BODY "PKG_ZIPCODE" AS
+
+  PROCEDURE PROC_ZIPCODE_FIND (
+    IN_TEXT  IN  VARCHAR2,
+    O_CUR    OUT SYS_REFCURSOR
+  ) AS
+  BEGIN
+    OPEN O_CUR FOR
+    SELECT 
+      DISTINCT ZIPCODE,
+      SIDO,
+      SIGUNGU,
+      DORO
+      FROM ZIPCODE
+      WHERE SIDO || '' || SIGUNGU || '' || DORO LIKE '%'|| IN_TEXT || '%';
+  END PROC_ZIPCODE_FIND;
+
+END PKG_ZIPCODE;

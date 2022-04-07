@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="History">
+
+	<resultMap id="HistoryMap" type="com.spring.history.vo.HistoryVo">
+		<result property="emp_id" 	column="emp_id"	javaType="string" />
+		<result property="hst_num" 	column="hst_num" javaType="int" />
+		<result property="hst_career" 	column="hst_career" javaType="String" />
+		<result property="hst_date" 	column="hst_date"	javaType="string" />
+	</resultMap>
+
+	<select id="HistoryList" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.history.vo.HistoryVo">
+			{CALL PKG_HISTORY.PROC_HISTORY_LIST(
+		#{emp_id, mode=IN, jdbcType=VARCHAR}
+		,#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=HistoryMap})}
+	</select>
+       
+           
+       <select id="HistoryList2" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.history.vo.HistoryVo">
+			{CALL PKG_HISTORY.PROC_HISTORY_LIST2(
+		#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=HistoryMap})}
+	</select>
+       
+</mapper>

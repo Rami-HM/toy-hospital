@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Emp">
+	<resultMap id="EmpMap" type="com.spring.emp.vo.EmpVo">
+		<result property="emp_id" column="EMP_ID" javaType="string" />
+		<result property="emp_name" column="EMP_NAME" javaType="string" />
+		<result property="dept_num" column="DEPT_NUM" javaType="int" />
+		<result property="emp_position" column="EMP_POSITION" javaType="string" />
+		<result property="emp_img" column="EMP_IMG" javaType="string" />
+		<result property="emp_pw" column="EMP_PW" javaType="string" />
+	</resultMap>
+
+	<resultMap id="EmployeeMap" type="com.spring.emp.vo.EmpVo">
+		<result property="emp_id" column="EMP_ID" javaType="string" />
+		<result property="emp_pw" column="EMP_PW" javaType="string" />
+		<result property="emp_name" column="EMP_NAME" javaType="string" />
+		<result property="dept_num" column="DEPT_NUM" javaType="int" />
+		<result property="emp_position" column="EMP_POSITION"
+			javaType="string" />
+		<result property="emp_img" column="EMP_IMG" javaType="string" />
+
+		<result property="dept_name" column="DEPT_NAME"
+			javaType="string" />
+		<result property="dept_desc" column="DEPT_DESC"
+			javaType="string" />
+	</resultMap>
+
+
+	<!-- 의료진 리스트 -->
+	<select id="List" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{ CALL PKG_EMP.PROC_EMP_LIST (
+		#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet,
+		resultMap=EmpMap }
+		)}
+	</select>
+
+	<!-- 의료진 세부사항 리스트 -->
+	<select id="detailList" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{ CALL PKG_EMP.PROC_EMP_DETAILLIST (
+		#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet,
+		resultMap=EmpMap }
+		)}
+	</select>
+
+
+	<!-- 의료진 로그인 -->
+	<select id="Login" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{ CALL PKG_EMP.PROC_EMP_LOGIN (
+		#{ id, mode=IN, jdbcType=VARCHAR },
+		#{ password, mode=IN, jdbcType=VARCHAR },
+		#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet,
+		resultMap=EmployeeMap }
+		)}
+	</select>
+
+	<!-- 고객정보 반환 -->
+	<select id="InquiryEmployee" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{ CALL PKG_EMP.PROC_EMP_INQUIRY (
+		#{ id, mode=IN, jdbcType=VARCHAR },
+		#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet,
+		resultMap=EmployeeMap }
+		)}
+	</select>
+
+	<!-- 의사,부서 정보 반환 -->
+	<select id="inquiryEmp" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{ CALL PKG_EMP.PROC_EMP_INQUIRYEMP (
+		#{ emp_id, mode=IN, jdbcType=VARCHAR },
+		#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet,
+		resultMap=EmployeeMap }
+		)}
+	</select>
+	
+	<!-- 의사 삭제 -->
+	<delete id="Delete">
+		{ CALL PKG_EMP.PROC_EMP_DELETE (
+			#{ emp_id, mode=IN, jdbcType=VARCHAR }
+		)}
+	</delete>
+
+	<!-- Song -->
+	<select id="DoctorList" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{CALL PKG_DOCTOR.PROC_DOCTOR_LIST(
+		#{ dept_name, mode=IN, jdbcType=VARCHAR },
+		#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=EmployeeMap})}
+	</select>
+
+	<!-- ============================================== -->
+
+	<select id="DoctorList2" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{CALL PKG_DOCTOR.PROC_DOCTOR_LIST2(
+		#{ dept_name, mode=IN, jdbcType=VARCHAR },
+		#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=EmployeeMap})}
+	</select>
+
+	<!-- ============================================== -->
+
+
+
+	<!-- ============================================== -->
+	<select id="DoctorDetailList" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{CALL
+		PKG_DOCTOR.PROC_DOCTOR_DETAILLIST(
+		#{ dept_num, mode=IN,
+		jdbcType=INTEGER }
+		,#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=EmployeeMap})}
+	</select>
+
+	<!-- ============================================== -->
+
+	<select id="DoctorDetailList2" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{CALL
+		PKG_DOCTOR.PROC_DOCTOR_DETAILLIST2(
+		#{ dept_num, mode=IN,
+		jdbcType=INTEGER }
+		,#{ dept_name,mode=IN, jdbcType=VARCHAR}
+		,#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=EmployeeMap})}
+	</select>
+
+
+	<select id="finalSearch" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{CALL
+		PKG_DOCTOR.PROC_DOCTOR_FINALSEARCH(
+		#{ dept_name,
+		mode=IN,jdbcType=VARCHAR }
+		,#{ emp_name,mode=IN,jdbcType=VARCHAR}
+		,#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=EmployeeMap})}
+	</select>
+
+	<select id="finalSearch2" statementType="CALLABLE"
+		parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+		{CALL
+		PKG_DOCTOR.PROC_DOCTOR_FINALSEARCH2(
+		#{ dept_name,
+		mode=IN,jdbcType=VARCHAR }
+		,#{ emp_name,mode=IN,jdbcType=VARCHAR}
+		,#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=EmployeeMap})}
+	</select>
+	
+	<select id="career" statementType="CALLABLE"
+      parameterType="hashmap" resultType="com.spring.emp.vo.EmpVo">
+      {CALL PKG_DOCTOR.PROC_DOCTOR_CAREER(
+      #{ emp_id, mode=IN,jdbcType=VARCHAR }      
+      ,#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=EmployeeMap})}
+   </select>
+
+
+</mapper> 

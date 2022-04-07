@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Pds"> 
+    <resultMap id="PdsMap" type="com.spring.pds.vo.PdsVo">
+    	<result property="brd_idx"         column="BRD_IDX"        javaType="int" />
+      	<result property="brd_title"       column="BRD_TITLE"      javaType="string" />
+      	<result property="brd_conts"       column="BRD_CONTS"      javaType="string" />
+      	<result property="brd_writer"      column="BRD_WRITER"     javaType="string" />
+      	<result property="brd_regdate"     column="BRD_REGDATE"    javaType="string" />
+      	<result property="readcount"       column="READCOUNT"      javaType="int" />
+      	<result property="brd_bnum"        column="BRD_BNUM"       javaType="int" />
+      	<result property="brd_lvl"         column="BRD_LVL"        javaType="int" />
+      	<result property="brd_step"        column="BRD_STEP"       javaType="int" />
+      	<result property="brd_nref"        column="BRD_NREF"       javaType="int" />
+      	<result property="sub_id"          column="SUB_ID"         javaType="string" />
+      	<result property="brd_delnum"      column="BRD_DELNUM"     javaType="int" />
+      
+	    <result property="filescount"      column="FILESCOUNT"     javaType="int" />
+    </resultMap>
+    
+    <!-- 게시물 목록 보기 -->
+  	<select id="PdsList"  
+  	    statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.pds.vo.PdsVo">
+  		{CALL PKG_PDS.PROC_PDS_LIST(
+  	       	#{sub_id,     mode=IN,   jdbcType=VARCHAR },
+  	       	#{nowpage,    mode=IN,   jdbcType=INTEGER },
+  	       	#{pagecount,  mode=IN,   jdbcType=INTEGER }, 
+  	        #{totalcount, mode=OUT,  jdbcType=INTEGER },
+  	        #{result,     mode=OUT,  jdbcType=CURSOR, javaType=ResultSet, resultMap=PdsMap } 
+  	  	)}      
+   	</select>
+    	
+    <!-- 게시글 작성 -->	
+    <insert id="PdsInsert" 
+        statementType="CALLABLE" parameterType="hashmap">
+     	{CALL  PKG_PDS.PROC_PDS_INSERT(
+        	#{ sub_id,          mode = IN,    jdbcType=VARCHAR },
+        	#{ brd_title,       mode = IN,    jdbcType=VARCHAR },
+        	#{ brd_conts,       mode = IN,    jdbcType=VARCHAR },
+        	#{ brd_writer,      mode = IN,    jdbcType=VARCHAR },
+        	#{ brd_bnum,        mode = IN,    jdbcType=INTEGER },
+        	#{ brd_lvl,         mode = IN,    jdbcType=INTEGER },
+        	#{ brd_step,        mode = IN,    jdbcType=INTEGER },
+        	#{ brd_nref,        mode = IN,    jdbcType=INTEGER },
+       
+       		#{ file_names,      mode = IN,    javaType=Object, 
+       			jdbcType=ARRAY, jdbcTypeName = FILE_ARRAY,
+            	typeHandler=com.spring.pds.service.typehandler.ListMapTypeHandler  },
+            #{ file_exts,       mode = IN,    javaType=Object,
+            	jdbcType=ARRAY, jdbcTypeName = FILE_ARRAY,
+            	typeHandler=com.spring.pds.service.typehandler.ListMapTypeHandler  },       
+       		#{ sfile_names,     mode = IN,    javaType=Object,
+            	jdbcType=ARRAY, jdbcTypeName = FILE_ARRAY,
+            	typeHandler=com.spring.pds.service.typehandler.ListMapTypeHandler  }      
+     )}
+
+	<!-- 게시글 본문 보기 -->
+    </insert>
+    <select id="GetContent" 
+            statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.pds.vo.PdsVo">
+     	{CALL  PKG_PDS.PROC_VIEW_CONTENT(
+        	#{ brd_idx,  mode = IN,  jdbcType=INTEGER },
+         	#{ result,   mode = OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=PdsMap }
+     	)}
+    </select>
+   	
+   	<!-- 게시글 수정 -->
+    <update id="UpdateContent" statementType="CALLABLE">
+        {CALL PKG_PDS.PROC_UPDATE_CONTENT (
+            #{ brd_idx,    mode=IN, jdbcType=INTEGER },
+            #{ brd_title,  mode=IN, jdbcType=VARCHAR },
+            #{ brd_conts,  mode=IN, jdbcType=VARCHAR }
+        )}
+    </update>
+    
+    <!-- 게시글 삭제 -->
+    <delete id="PdsDelete"
+    	parameterType="hashmap" statementType="CALLABLE">
+    	{CALL PKG_PDS.PROC_PDS_DELETE(
+    		#{ brd_idx, mode=IN, jdbcType=INTEGER }
+    	)}
+    </delete>
+   	
+   	
+   	
+   	<resultMap id="FileMap" type="com.spring.pds.vo.FilesVo">
+   		<result property="file_num"     column="FILE_NUM"     javaType="int" />
+   		<result property="brd_idx"      column="BRD_IDX"      javaType="int" />
+   		<result property="file_name"    column="FILE_NAME"    javaType="java.lang.String" />
+   		<result property="file_ext"     column="FILE_EXT"     javaType="java.lang.String" />
+   		<result property="sfile_name"   column="SFILE_NAME"   javaType="java.lang.String" />
+   	</resultMap>
+   	
+   	<select id="FileList"
+   	    statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.pds.vo.PdsVo">
+   		{CALL PKG_PDS.PROC_FILE_LIST (
+   			#{ brd_idx,   mode = IN,  jdbcType=INTEGER },
+        	#{ result,    mode = OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=FileMap }
+   		)}
+	</select>   	
+</mapper> 

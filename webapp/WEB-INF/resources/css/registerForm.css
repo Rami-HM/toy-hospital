@@ -1,0 +1,53 @@
+body {
+	background-color: #F2F2F2;
+}
+
+#table {
+	background-color: #FAFAFA;
+	border: 2px solid #E6E6E6;
+	width: 1050px;
+	padding: 50px;
+	margin: 100px auto;
+}
+
+th, td {
+	color: #848484;
+	padding: 20px;
+	font-size: 20px;
+}
+
+th {
+	width: 140px;
+}
+
+span {
+	color: red;
+	font-size: 12px;
+}
+
+input {
+	line-height: 25px;
+}
+
+select {
+	height: 25px;
+}
+
+input[type=button] {
+	background-color: white;
+	font-weight: bold;
+	width: 100px;
+	height: 30px;
+	font-size: 14px;
+	color: #848484;
+}
+
+input[type=submit] {
+	background-color: white;
+	font-weight: bold;
+	width: 100px;
+	height: 30px;
+	margin-right: 80px;
+	font-size: 14px;
+	color: #848484;
+}

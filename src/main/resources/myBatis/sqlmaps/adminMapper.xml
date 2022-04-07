@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Admin">
+   <resultMap id="AdminMap" type="com.spring.admin.vo.AdminVo">
+        <result property="admin_id"  column="ADMIN_ID"  javaType="string" />
+        <result property="admin_pw"  column="ADMIN_PW"  javaType="string" />
+    </resultMap>
+
+   <!-- 관리자 로그인 -->
+   <select id="Login" 
+      statementType="CALLABLE" parameterType="hashmap" resultType="java.lang.String">
+      { CALL PKG_ADMIN.PROC_ADMIN_LOGIN (      
+         #{ id,       mode=IN,  jdbcType=VARCHAR },
+             #{ password, mode=IN,  jdbcType=VARCHAR },
+         #{ result,   mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap }
+      )}
+   </select>
+   
+   <!-- 관리자 아이디 조회 -->
+   <select id="InquiryAdmin" 
+      statementType="CALLABLE" parameterType="hashmap" resultType="java.lang.String">
+      { CALL PKG_ADMIN.PROC_ADMIN_INQUIRY (      
+         #{ id,       mode=IN,  jdbcType=VARCHAR },
+         #{ result,   mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=AdminMap }
+      )}
+   </select>
+</mapper> 
+   
+   

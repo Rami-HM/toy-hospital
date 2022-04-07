@@ -1,0 +1,128 @@
+h1{
+	padding: 10px 80px 10px 30px;
+	background:#018ace;
+	display:block;
+	color:#fff;
+}
+
+table{margin:30px auto 80px auto;
+      height:280px;
+      width:700px;
+      text-align:center;
+      border:0.5px solid #018ace;
+      border-collapse:collapse;}
+  
+#btn {
+	border:none;
+	border-radius:2px;
+	background:#018ace;
+	width:55px;
+	height:20px;
+	color:#fff;
+	letter-spacing:5px;
+	font-weight:bold;
+	position:absolute;
+	  bottom:-50px;
+	  left:50%;
+}
+
+.reslist h3 {
+	padding: 30px 15px 0 0;
+}
+
+.reserv {
+	background: #403B39;
+	width: 100%;
+	height: 170px;
+	color: #fff;
+}
+
+.reserv button {
+	margin-left: 140px;
+}
+
+.reserv a {
+	color: #fff;
+}
+
+.center {
+	background: #5E5D56;
+	width: 100%;
+	height: 170px;
+	color: white;
+}
+
+.center button {
+	margin-left: 140px;
+	color: #fff;
+}
+
+.info {
+	background: #1684fb;
+	width: 100%;
+	height: 170px;
+	color: white;
+}
+
+.info button {
+	margin-left: 140px;
+	color: #fff;
+}
+
+.dddd {
+	background: #fff;
+	width: 100%;
+	height: 150px;
+	color: #5E5D56;
+}
+
+.dddd button {
+	margin-left: 140px;
+	color: #5E5D56;
+}
+
+.main h2 {
+	padding: 18px 30px;
+}
+
+.main p {
+	padding: 5px 15px;
+}
+
+.doc {
+	clear: both;
+	position: relative;
+}
+
+.doc h1 {
+	position: absolute;
+	top: 40px;
+	left: 40px;
+}
+
+.doc input {
+	position: absolute;
+	line-height: 50px;
+	border: none; `
+	left: 40px;
+	top: 100px;
+}
+
+.doc button {
+	position: absolute;
+	top: 100px;
+	left: 400px;
+	border: none;
+	width: 100px;
+	height: 50px;
+	background: #333;
+	color: #fff;
+}
+
+
+.hellopat {
+	padding: 10px 80px 10px 30px;
+	background: #018ace;
+	display: block;
+	color: #fff;
+}

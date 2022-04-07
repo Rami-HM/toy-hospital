@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="Patient">
+ <resultMap id="PatientMap" type="com.spring.patient.vo.PatientVo">
+	        <result property="pat_id"       column="PAT_ID"       javaType="string" />
+	        <result property="pat_pw"       column="PAT_PW"       javaType="string" />
+	        <result property="pat_name"     column="PAT_NAME"     javaType="string" />
+	        <result property="pat_ssn"      column="PAT_SSN"      javaType="string" />
+	        <result property="pat_email"    column="PAT_EMAIL"    javaType="string" />
+	        <result property="pat_tel"      column="PAT_TEL"      javaType="string" />
+	        <result property="pat_address"  column="PAT_ADDRESS"  javaType="string" />
+	    </resultMap>
+	
+		<!-- 고객 로그인 -->
+		<select id="Login" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.patient.vo.PatientVo">
+      		{ CALL PKG_PATIENTS.PROC_PATIENTS_LOGIN (
+          	#{ id,       mode=IN,  jdbcType=VARCHAR },
+          	#{ password, mode=IN,  jdbcType=VARCHAR },
+          	#{ result,   mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=PatientMap }
+      	)}
+   		</select>
+   		
+		<!-- 아이디로 고객정보 조회 -->
+		<select id="InquiryPatient" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.patient.vo.PatientVo">
+      		{ CALL PKG_PATIENTS.PROC_PATIENTS_INQUIRY (
+          	#{ id,     mode=IN,  jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=PatientMap }
+      	)}
+   		</select>
+   		
+		<!-- 회원가입 처리 -->
+		<insert id="RegPatient" statementType="CALLABLE">
+      		{ CALL PKG_PATIENTS.PROC_PATIENTS_REGISTER (
+          	#{ id,          mode=IN,  jdbcType=VARCHAR },
+          	#{ password,    mode=IN,  jdbcType=VARCHAR },
+          	#{ name,        mode=IN,  jdbcType=VARCHAR },
+          	#{ ssn,         mode=IN,  jdbcType=VARCHAR },
+          	#{ pat_tel,     mode=IN,  jdbcType=VARCHAR },
+          	#{ pat_email,   mode=IN,  jdbcType=VARCHAR },
+          	#{ pat_address, mode=IN,  jdbcType=VARCHAR },
+          	#{ gender,      mode=IN,  jdbcType=VARCHAR }
+      	)}
+   		</insert>
+
+		<!-- 고객 리스트 -->
+		<select id="List" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.patient.vo.PatientVo">
+      		{ CALL PKG_PATIENTS.PROC_PATIENTS_LIST (
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=PatientMap }
+      	)}
+   		</select>
+   		
+   		
+   		<!-- 탈퇴 -->
+   		<delete id="Delete">
+   			{ CALL PKG_PATIENTS.PROC_PATIENTS_DELETE(
+   				#{ in_pat_id, mode = IN, jdbcType = VARCHAR } 
+   			)}
+   		</delete>
+   		
+   		<!-- 아이디 찾기 -->
+   		<select id="findid" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.patient.vo.PatientVo">
+            { CALL PKG_PATIENTS.PROC_PATIENTS_FINDID (
+            
+            #{ pat_name,       mode=IN,     jdbcType=VARCHAR },
+             #{ pat_ssn,         mode=IN,     jdbcType=VARCHAR },
+             #{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=PatientMap }
+         )}
+         </select>         
+         
+         <!-- 패스워드 찾기 -->
+         <select id="findpwd" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.patient.vo.PatientVo">
+            { CALL PKG_PATIENTS.PROC_PATIENTS_FINDPWD (
+            
+            #{ pat_id,            mode=IN,   jdbcType=VARCHAR},
+            #{ pat_name,       mode=IN,     jdbcType=VARCHAR },
+             #{ pat_ssn,         mode=IN,     jdbcType=VARCHAR },
+              #{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=PatientMap }
+         )}
+         </select>      
+         
+         <!-- 비밀번호 변경 -->
+         <update id="changepwd" statementType="CALLABLE" parameterType="hashmap">
+            { CALL PKG_PATIENTS.PROC_PATIENTS_CHANGEPWD (
+             
+             #{ pat_id, mode=IN, jdbcType=VARCHAR },
+             #{ new_pat_pw, mode=IN, jdbcType=VARCHAR }
+           
+           )}
+         </update>
+   	
+   		
+   		
+	</mapper> 

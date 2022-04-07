@@ -1,0 +1,137 @@
+@page contentType="text/css"
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: 'Nanum Gothic', sans-serif;
+	margin-bottom:30px;
+}
+
+#container {
+	margin: 0 auto;
+	width: 1000px;
+	position: relative;
+}
+
+header {
+	width: 100%;
+	height: 60px;
+	margin: 0 auto;
+}
+
+header img {
+	position: absolute;
+	left: 50%;
+	margin-left: -120px;
+	margin-top: 15px;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+section {
+	margin-top: 30px;
+}
+
+section h1, h2 {
+	margin-bottom: 30px;
+	color: #5E5D56;
+}
+
+table {
+	width: 1000px;
+	height: auto;
+	color: #5E5D56;
+	text-align:center;
+}
+
+table tr{
+	height: 50px;
+}
+
+.name{
+	width:auto;
+}
+
+td {
+	padding-left: 30px;
+	width:
+}
+
+.first{
+	height:70px;
+	background:#018ace;
+	color:#fff; font-size:14px; 
+	text-align: center;
+	
+}
+
+.second{
+	height:70px;
+	background:#5E5D56;
+	color:#fff; font-size:14px; 
+}
+
+table.th:nth-child(2){
+	width:50px;
+}
+
+table input {
+	width: 300px;
+	height: 20px;
+}
+
+.sub input {
+	width: 110px;
+	height: 35px;
+	background: #7A786F;
+	color: #fff;
+	border: 1px solid;
+	margin-right: 20px;
+}
+
+
+.call p {
+	position: absolute;
+	left: 200px;
+	top: 650px;
+}
+
+.info {
+	font-size:13px;
+	
+	border: 1px solid black;
+}
+
+.fixed{
+	width:100px;
+	height:100px;
+	padding:10px;
+	border: 2px solid #018ace;
+	border-radius:10px;
+	font-size:12px;
+	position:fixed;
+	top:50px;
+	right:5px;
+}
+
+#deletebtn{
+	width:40px;
+	height:18px;
+	color:#fff;
+	background:#018ace;
+	border:none;
+	border-radius:2px;
+	margin:30px;
+}
+
+footer {
+	
+}

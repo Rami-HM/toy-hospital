@@ -1,0 +1,41 @@
+@charset "UTF-8";
+.menuBar {
+	text-align: center;
+}
+
+.menuBar li {
+	list-style:none;
+	width: 150px; height : 45px;
+	line-height:47px;
+	background-color: white;
+}
+
+.menuBar > li {
+	
+	float:left;
+}
+
+.menuBar > li > ul {
+	display: none;
+	height: auto;
+	padding: 0;
+	position: absolute;
+	width: 150px;
+}
+
+
+.menuBar > li:hover ul {
+	display: block;
+	opacity: 0.9;
+	width: 150px;
+}
+
+.menuBar a {
+	font-weight: bold;
+	color: #5E5D56;
+	text-decoration: none;
+	display:inline-block;
+	width:150px;
+}
+
+.menuBar > li > a:hover{border-bottom: solid 4px #edd600; transition: 0.5s;}

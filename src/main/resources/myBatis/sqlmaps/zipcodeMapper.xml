@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="Zipcode">
+		 <resultMap id="ZipcodeMap" type="com.spring.zipcode.vo.ZipcodeVo">
+	        <result property="zipcode"    column="ZIPCODE"   javaType="int" />
+	        <result property="sido"       column="SIDO"      javaType="string" />
+	        <result property="sigungu"    column="SIGUNGU"   javaType="string" />
+	        <result property="doro"       column="DORO"      javaType="string" />
+	    </resultMap>
+	
+		<!-- 주소찾기(회원가입) -->
+		<select id="FindAddress" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.zipcode.vo.ZipcodeVo">
+      		{ CALL PKG_ZIPCODE.PROC_ZIPCODE_FIND (
+          	#{ text, mode=IN, jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ZipcodeMap }
+      		)}
+   		</select>
+	</mapper> 

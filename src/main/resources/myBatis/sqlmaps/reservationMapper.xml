@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="Reservation">
+		 <resultMap id="ReservationMap" type="com.spring.reservation.vo.ReservationVo">
+	        <result property="res_num"        column="RES_NUM"   javaType="int" />
+	        <result property="res_date"       column="RES_DATE"  javaType="string" />
+	        <result property="res_time"       column="RES_TIME"  javaType="string" />
+	        <result property="pat_id"         column="PAT_ID"    javaType="string" />
+	        <result property="emp_id"         column="EMP_ID"    javaType="string" />
+	        <result property="diagnose"       column="DIAGNOSE"  javaType="string" />
+	        <result property="pat_pw"         column="PAT_PW"    javaType="string" />
+	        <result property="pat_name"       column="PAT_NAME"  javaType="string" />
+	        <result property="pat_ssn"        column="PAT_SSN"       javaType="string" />
+	        <result property="pat_email"      column="PAT_EMAIL"     javaType="string" />
+	        <result property="pat_tel"        column="PAT_TEL"       javaType="string" />
+	        <result property="pat_address"    column="PAT_ADDRESS"   javaType="string" />
+	    </resultMap>
+	
+		<!-- (의료진 페이지) 전체 예약내역확인 -->
+		<select id="InquiryReservation" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.reservation.vo.ReservationVo">
+      		{ CALL PKG_RESERVATION.PROC_RESERVATION_INQUIRY (
+          	#{ id,     mode=IN,  jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ReservationMap }
+      		)}
+   		</select>
+   		
+		<!-- (의료진 페이지) 오늘 예약내역확인 -->
+		<select id="InquiryReservationToday" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.reservation.vo.ReservationVo">
+      		{ CALL PKG_RESERVATION.PROC_RESERVATION_INQUIRYTODAY (
+          	#{ id,     mode=IN,  jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ReservationMap }
+      		)}
+   		</select>
+   		
+		<!-- 특정 예약내역 불러오기 -->
+		<select id="GetReservationData" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.reservation.vo.ReservationVo">
+      		{ CALL PKG_EMP.PROC_EMP_RESERVATIONDATA (
+          	#{ id,         mode=IN,  jdbcType=VARCHAR },
+          	#{ res_date,   mode=IN,  jdbcType=VARCHAR },
+          	#{ res_time,   mode=IN,  jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ReservationMap }
+      		)}
+   		</select>
+   		
+   		<!-- 날짜 불러오기 -->
+	    <select id="Res" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.reservation.vo.ReservationVo">
+      		{ CALL PKG_RES.PROC_RES_DATE (
+          	#{ res_date, mode=IN, jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ReservationMap }
+      	)}
+   		</select>
+		<!-- 예약 현황 불러오기 -->
+	    <select id="Time" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.reservation.vo.ReservationVo">
+      		{ CALL PKG_RES.PROC_RES_LIST (
+          	#{ res_date, mode=IN, jdbcType=VARCHAR },
+          	#{ emp_name, mode=IN, jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ReservationMap }
+      	)}
+   		</select>
+   		<!-- 예약 추가하기 -->
+   		<insert id="Ins" statementType="CALLABLE" parameterType="hashmap" >
+      		{ CALL PKG_RES.PROC_RES_INSERT (
+          	#{ res_num,  mode=IN, jdbcType=INTEGER },
+          	#{ res_date, mode=IN, jdbcType=VARCHAR },
+          	#{ res_time, mode=IN, jdbcType=VARCHAR },
+          	#{ pat_id,   mode=IN, jdbcType=VARCHAR },
+          	#{ diagnose, mode=IN, jdbcType=VARCHAR },
+          	#{ emp_name, mode=IN, jdbcType=VARCHAR }
+      	)}
+   		</insert>
+   		
+   		<!-- 특정 환자 예약 현황 불러오기 -->
+	    <select id="Check" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.reservation.vo.ReservationVo">
+      		{ CALL PKG_RES.PROC_RES_CHECK (
+          	#{ res_date, mode=IN, jdbcType=VARCHAR },
+          	#{ res_time, mode=IN, jdbcType=VARCHAR },
+          	#{ pat_id,  mode=IN, jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ReservationMap }
+      	)}
+   		</select>
+	</mapper> 

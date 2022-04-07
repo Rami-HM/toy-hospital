@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Mypage">
+	<resultMap id="MypageResMap" type="com.spring.reservation.vo.ReservationVo">
+	        <result property="res_num"        column="RES_NUM"   	javaType="int" />
+	        <result property="res_date"       column="RES_DATE"  	javaType="string" />
+	        <result property="res_time"       column="RES_TIME"  	javaType="string" />
+	        <result property="pat_id"         column="PAT_ID"    	javaType="string" />
+	        <result property="emp_id"         column="EMP_ID"    	javaType="string" />
+	        <result property="diagnose"       column="DIAGNOSE"  	javaType="string" />
+	        <result property="pat_pw"         column="PAT_PW"    	javaType="string" />
+	        <result property="pat_name"       column="PAT_NAME"  	javaType="string" />
+	        <result property="pat_ssn"        column="PAT_SSN"   	javaType="string" />
+	        <result property="pat_email"      column="PAT_EMAIL" 	javaType="string" />
+	        <result property="pat_tel"        column="PAT_TEL"      javaType="string" />
+	        <result property="pat_address"    column="PAT_ADDRESS"  javaType="string" />
+    </resultMap>
+	 <select id="List" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.reservation.vo.ReservationVo">
+	 		{ CALL PKG_PAT.PROC_PAT_MYPAGELIST (
+	 			#{ pat_id, mode=IN, jdbcType=VARCHAR },
+	 			#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MypageResMap }
+	 		)}
+	 </select>
+	 <delete id="Delete" statementType="CALLABLE" parameterType="hashmap" >
+	 		{ CALL PKG_PAT.PROC_PAT_MYPAGEDELETE (
+	 			#{ pat_id, mode=IN, jdbcType=VARCHAR },
+	 			#{ res_date, mode=IN, jdbcType=VARCHAR },
+	 			#{ res_time, mode=IN, jdbcType=VARCHAR }
+	 		)}
+	 </delete>
+	 
+	 <update id="Update" statementType="CALLABLE" parameterType="hashmap">
+	 	{CALL PKG_PAT.PROC_PAT_MYPAGEUPDATE(
+	 		#{ pat_id, mode=IN, jdbcType=VARCHAR },
+ 			#{ pat_name, mode=IN, jdbcType=VARCHAR },
+ 			#{ pat_tel, mode=IN, jdbcType=VARCHAR },
+ 			#{ pat_address, mode=IN, jdbcType=VARCHAR },
+ 			#{ pat_pw, mode=IN, jdbcType=VARCHAR },
+ 			#{ pat_emil, mode=IN, jdbcType=VARCHAR }
+	 	)}
+	 </update>
+	 
+	 
+	 <select id="Member" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.reservation.vo.ReservationVo">
+	 		{ CALL PKG_PAT.PROC_PAT_MYPAGEMEMBER (
+	 			#{ pat_id, mode=IN, jdbcType=VARCHAR },
+	 			#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=MypageResMap }
+	 		)}
+	 </select>
+	 
+</mapper>

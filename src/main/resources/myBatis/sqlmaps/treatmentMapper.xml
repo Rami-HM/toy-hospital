@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="Treatment">
+		 <resultMap id="TreatmentMap" type="com.spring.treatment.vo.TreatmentVo">
+	        <result property="pat_id"         column="PAT_ID"        javaType="string" />
+	        <result property="pat_name"       column="PAT_NAME"      javaType="string" />
+	        <result property="pat_tel"        column="PAT_TEL"       javaType="string" />
+	        <result property="pat_address"    column="PAT_ADDRESS"   javaType="string" />
+	        <result property="pat_email"      column="PAT_EMAIL"     javaType="string" />
+	        <result property="pat_gender"     column="PAT_GENDER"    javaType="string" />
+	        
+	        <result property="trt_date"       column="TRT_DATE"      javaType="string" />
+	        <result property="emp_conts"      column="EMP_CONTS"     javaType="string" />
+	        
+	        <result property="emp_name"       column="EMP_NAME"      javaType="string" />
+	        
+	        <result property="dept_name"      column="DEPT_NAME"     javaType="string" />
+	    </resultMap>
+	
+		<!-- 환자 이전진료기록 정보 -->
+		<select id="InquiryTreatment" statementType="CALLABLE" parameterType="hashmap" resultType="com.spring.treatment.vo.TreatmentVo">
+      		{ CALL PKG_TREATMENT.PROC_TREATMENT_INQUIRY (
+          	#{ id,     mode=IN,  jdbcType=VARCHAR },
+          	#{ result, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=TreatmentMap }
+      		)}
+   		</select>
+   		
+   		<!-- 진료서 작성 -->
+      <insert id="WriteTreatment" statementType="CALLABLE">
+            { CALL PKG_TREATMENT.PROC_TREATMENT_WRITE (
+             #{ pat_id,     mode=IN,  jdbcType=VARCHAR },
+             #{ emp_id,     mode=IN,  jdbcType=VARCHAR },
+             #{ emp_conts,  mode=IN,  jdbcType=VARCHAR },
+             #{ res_num,    mode=IN,  jdbcType=INTEGER }
+            )}
+      </insert>
+   		
+	</mapper> 

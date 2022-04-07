@@ -1,0 +1,43 @@
+body{height:800px;}
+section {
+	margin-top:10px;
+}
+
+section h1, h2 {
+	margin-bottom: 30px;
+	color: #5E5D56;
+}
+
+section h1{
+	padding: 10px 80px 10px 30px;
+	background:#018ace;
+	display:block;
+	color:#fff;
+}
+
+section img{
+	margin-top:-30px;
+	width:100%;
+}
+
+.explain p {
+	font-size: 12px;
+	float: left;
+	margin-right: 20px;
+}
+
+.explain {
+	position: relative;
+	top: 100px;
+}
+
+#btn {
+	border:none;
+	border-radius:2px;
+	background:#018ace;
+	width:55px;
+	height:20px;
+	color:#fff;
+	letter-spacing:5px;
+	font-weight:bold;
+}

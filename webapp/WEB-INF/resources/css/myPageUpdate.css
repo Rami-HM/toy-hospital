@@ -1,0 +1,97 @@
+.doc {
+	clear: both;
+	position: relative;
+}
+
+.doc h1 {
+	position: absolute;
+	top: 40px;
+	left: 40px;
+}
+
+.doc input {
+	position: absolute;
+	line-height: 50px;
+	border: none; `
+	left: 40px;
+	top: 100px;
+}
+
+.doc button {
+	position: absolute;
+	top: 100px;
+	left: 400px;
+	border: none;
+	width: 100px;
+	height: 50px;
+	background: #333;
+	color: #fff;
+}
+
+.reslist h3 {
+	padding: 30px 15px 0 0;
+}
+
+.reslist table {
+	margin: 0 auto;
+	border: 1px solid #ddd;
+	width: 800px;
+	text-align: center;
+	margin: 20px auto;
+}
+
+.reslist tr {
+	
+}
+
+.reslist td {
+	width: 20%;
+	height: 40px;
+}
+
+.pverify {
+	border: none;
+	border-radius: 2px;
+	background: #018ace;
+	width: 30px;
+	height: 20px;
+	color: #fff;
+	letter-spacing: 5px;
+	font-weight: bold;
+}
+
+.reverify {
+	border: none;
+	border-radius: 2px;
+	background: #018ace;
+	width: 30px;
+	height: 20px;
+	color: #fff;
+	letter-spacing: 5px;
+	font-weight: bold;
+}
+
+.hellopat {
+	padding: 10px 80px 10px 30px;
+	background: #018ace;
+	display: block;
+	color: #fff;
+}
+
+.main p {
+	padding: 10px 15px;
+}
+
+#btn {
+	border: none;
+	border-radius: 2px;
+	background: #018ace;
+	width: 120px;
+	height: 30px;
+	color: #fff;
+	letter-spacing: 5px;
+	font-weight: bold;
+	position: absolute;
+	left: 50%;
+	margin-left: -60px;
+}
